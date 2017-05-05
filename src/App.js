@@ -25,102 +25,102 @@ import wcag from '../public/wcag.json';
 const customData = {
   "1-1-1": {
     "summary": "Provide text alternatives for non-text content",
-    "responsibility": ["dev"],
+    "responsibility": ["dev","UX"],
     "testing": "Testing Strategies"
   },
   "1-2-1": {
     "summary": "Provide an alternative to video-only and audio-only content",
-    "responsibility": ["dev"],
+    "responsibility": ["content"],
     "testing": "Testing Strategies"
   },
   "1-2-2": {
     "summary": "Provide captions for videos with audio",
-    "responsibility": ["dev"],
+    "responsibility": ["content"],
     "testing": "Testing Strategies"
   },
   "1-2-3": {
     "summary": "Video with audio has a second alternative",
-    "responsibility": ["dev"],
+    "responsibility": ["content","UX"],
     "testing": "Testing Strategies"
   },
   "1-2-4": {
-    "summary": "Video with audio has a second alternative",
-    "responsibility": ["dev"],
+    "summary": "Live Video with audio has a second alternative",
+    "responsibility": ["content","live"],
     "testing": "Testing Strategies"
   },
   "1-2-5": {
     "summary": "Users have access to audio description for video content",
-    "responsibility": ["dev"],
+    "responsibility": ["content"],
     "testing": "Testing Strategies"
   },
   "1-2-6": {
     "summary": "Provide sign language translations for videos",
-    "responsibility": ["dev"],
+    "responsibility": ["content"],
     "testing": "Testing Strategies"
   },
   "1-2-7": {
     "summary": "Provide extended audio description for videos",
-    "responsibility": ["dev"],
+    "responsibility": ["content"],
     "testing": "Testing Strategies"
   },
   "1-2-8": {
     "summary": "Provide a text alternative to your videos",
-    "responsibility": ["dev"],
+    "responsibility": ["content","UX"],
     "testing": "Testing Strategies"
   },
   "1-2-9": {
     "summary": "Provide alternatives for live audio",
-    "responsibility": ["dev"],
+    "responsibility": ["live","content"],
     "testing": "Testing Strategies"
   },
   "1-3-1": {
     "summary": "Structure your website logically",
-    "responsibility": ["dev"],
+    "responsibility": ["dev","UX"],
     "testing": "Testing Strategies"
   },
   "1-3-2": {
     "summary": "Present your website content in a meaningful order",
-    "responsibility": ["dev"],
+    "responsibility": ["dev","Ux"],
     "testing": "Testing Strategies"
   },
   "1-3-3": {
     "summary": "Use more than one sense for instructions",
-    "responsibility": ["dev"],
+    "responsibility": ["dev","UX","content"],
     "testing": "Testing Strategies"
   },
   "1-4-1": {
     "summary": "Don’t use presentation that relies solely on colour",
-    "responsibility": ["dev"],
+    "responsibility": ["dev","UX"],
     "testing": "Testing Strategies"
   },
   "1-4-2": {
     "summary": "Don’t play audio automatically",
-    "responsibility": ["dev"],
+    "responsibility": ["dev","UX"],
     "testing": "Testing Strategies"
   },
   "1-4-3": {
     "summary": "Contrast ratio between your text and background is at least 4.5:1",
-    "responsibility": ["dev"],
+    "responsibility": ["dev",'UX'],
     "testing": "Testing Strategies"
   },
   "1-4-4": {
     "summary": "Text can be resized to 200% without loss of content or function",
-    "responsibility": ["dev"],
+    "responsibility": ["dev","UX"],
     "testing": "Testing Strategies"
   },
   "1-4-5": {
     "summary": "Don't use images of text",
-    "responsibility": ["dev"],
+    "responsibility": ["dev","content","UX"],
     "testing": "Testing Strategies"
   },
   "1-4-6": {
     "summary": "Contrast ratio between your text and background is at least 7:1",
-    "responsibility": ["dev"],
+    "responsibility": ["dev","UX"],
     "testing": "Testing Strategies"
   },
   "1-4-7": {
     "summary": "Your audio is clear for listeners to hear",
-    "responsibility": ["dev"],
+    "responsibility": ["content"],
     "testing": "Testing Strategies"
   },
   "1-4-8": {
@@ -130,17 +130,17 @@ const customData = {
   },
   "1-4-9": {
     "summary": "Don't use images of text",
-    "responsibility": ["dev"],
+    "responsibility": ["dev","UX"],
     "testing": "Testing Strategies"
   },
   "2-1-1": {
     "summary": "Accessible by keyboard only",
-    "responsibility": ["dev"],
+    "responsibility": ["dev","UX"],
     "testing": "Testing Strategies"
   },
   "2-1-2": {
     "summary": "Your website must not trap keyboard users",
-    "responsibility": ["dev"],
+    "responsibility": ["dev","UX"],
     "testing": "Testing Strategies"
   },
   "2-1-3": {
@@ -150,22 +150,22 @@ const customData = {
   },
   "2-2-1": {
     "summary": "Time limits have user controls",
-    "responsibility": ["dev"],
+    "responsibility": ["dev","UX"],
     "testing": "Testing Strategies"
   },
   "2-2-2": {
     "summary": "Provide user controls for moving content",
-    "responsibility": ["dev"],
+    "responsibility": ["dev","UX"],
     "testing": "Testing Strategies"
   },
   "2-2-3": {
     "summary": "No time limits on your website",
-    "responsibility": ["dev"],
+    "responsibility": ["dev","UX"],
     "testing": "Testing Strategies"
   },
   "2-2-4": {
     "summary": "Don't interrupt your users",
-    "responsibility": ["dev"],
+    "responsibility": ["dev","UX"],
     "testing": "Testing Strategies"
   },
   "2-2-5": {
@@ -175,147 +175,147 @@ const customData = {
   },
   "2-3-1": {
     "summary": "No content flashes more than three times per second",
-    "responsibility": ["dev"],
+    "responsibility": ["dev","UX"],
     "testing": "Testing Strategies"
   },
   "2-3-2": {
     "summary": "No content flashes more than three times per second",
-    "responsibility": ["dev"],
+    "responsibility": ["dev","UX"],
     "testing": "Testing Strategies"
   },
   "2-4-1": {
     "summary": "Provide a ‘Skip to Content’ link",
-    "responsibility": ["dev"],
+    "responsibility": ["dev","UX"],
     "testing": "Testing Strategies"
   },
   "2-4-10": {
     "summary": "Break up content with headings",
-    "responsibility": ["dev"],
+    "responsibility": ["dev","UX"],
     "testing": "Testing Strategies"
   },
   "2-4-2": {
     "summary": "Use helpful and clear page titles",
-    "responsibility": ["dev"],
+    "responsibility": ["dev","UX"],
     "testing": "Testing Strategies"
   },
   "2-4-3": {
     "summary": "Pages work in a logical order",
-    "responsibility": ["dev"],
+    "responsibility": ["dev","UX"],
     "testing": "Testing Strategies"
   },
   "2-4-4": {
     "summary": "Every link's purpose is clear from its context",
-    "responsibility": ["dev"],
+    "responsibility": ["dev","UX"],
     "testing": "Testing Strategies"
   },
   "2-4-5": {
     "summary": "Offer several ways to find pages on your website",
-    "responsibility": ["dev"],
+    "responsibility": ["dev","UX"],
     "testing": "Testing Strategies"
   },
   "2-4-6": {
     "summary": "Use clear headings and labels",
-    "responsibility": ["dev"],
+    "responsibility": ["dev","UX"],
     "testing": "Testing Strategies"
   },
   "2-4-7": {
     "summary": "Ensure keyboard focus is visible and clear",
-    "responsibility": ["dev"],
+    "responsibility": ["dev","UX"],
     "testing": "Testing Strategies"
   },
   "2-4-8": {
     "summary": "Let users know where they are on your website",
-    "responsibility": ["dev"],
+    "responsibility": ["dev","UX"],
     "testing": "Testing Strategies"
   },
   "2-4-9": {
     "summary": "Every link's purpose is clear from its text",
-    "responsibility": ["dev"],
+    "responsibility": ["dev","UX"],
     "testing": "Testing Strategies"
   },
   "3-1-1": {
     "summary": "Every page of your website has a language assigned",
-    "responsibility": ["dev"],
+    "responsibility": ["dev","UX"],
     "testing": "Testing Strategies"
   },
   "3-1-2": {
     "summary": "Tell users when the language on a page changes",
-    "responsibility": ["dev"],
+    "responsibility": ["dev","UX"],
     "testing": "Testing Strategies"
   },
   "3-1-3": {
     "summary": "Explain any strange words",
-    "responsibility": ["dev"],
+    "responsibility": ["dev","UX"],
     "testing": "Testing Strategies"
   },
   "3-1-4": {
     "summary": "Explain any abbreviations",
-    "responsibility": ["dev"],
+    "responsibility": ["content"],
     "testing": "Testing Strategies"
   },
   "3-1-5": {
     "summary": "Users with nine years of school can read your content",
-    "responsibility": ["dev"],
+    "responsibility": ["content"],
     "testing": "Testing Strategies"
   },
   "3-1-6": {
     "summary": "Explain any words that are hard to pronounce",
-    "responsibility": ["dev"],
+    "responsibility": ["content"],
     "testing": "Testing Strategies"
   },
   "3-2-1": {
     "summary": "Elements do not change when they receive focus",
-    "responsibility": ["dev"],
+    "responsibility": ["dev","UX"],
     "testing": "Testing Strategies"
   },
   "3-2-2": {
     "summary": "Elements do not change when they receive input",
-    "responsibility": ["dev"],
+    "responsibility": ["dev","UX"],
     "testing": "Testing Strategies"
   },
   "3-2-3": {
     "summary": "Use menus in the same place across your website",
-    "responsibility": ["dev"],
+    "responsibility": ["dev","UX"],
     "testing": "Testing Strategies"
   },
   "3-2-4": {
     "summary": "Use menus in the same place across your website",
-    "responsibility": ["dev"],
+    "responsibility": ["dev","UX"],
     "testing": "Testing Strategies"
   },
   "3-2-5": {
     "summary": "Don’t change elements on your website until users ask",
-    "responsibility": ["dev"],
+    "responsibility": ["dev","UX"],
     "testing": "Testing Strategies"
   },
   "3-3-1": {
     "summary": "Clearly identify input errors",
-    "responsibility": ["dev"],
+    "responsibility": ["dev","UX"],
     "testing": "Testing Strategies"
   },
   "3-3-2": {
     "summary": "Label elements and give instructions",
-    "responsibility": ["dev"],
+    "responsibility": ["dev","UX"],
     "testing": "Testing Strategies"
   },
   "3-3-3": {
     "summary": "Suggest fixes when users make errors",
-    "responsibility": ["dev"],
+    "responsibility": ["dev","UX"],
     "testing": "Testing Strategies"
   },
   "3-3-4": {
     "summary": "Reduce the risk of input errors for sensitive data",
-    "responsibility": ["dev"],
+    "responsibility": ["dev","UX"],
     "testing": "Testing Strategies"
   },
   "3-3-5": {
     "summary": "Your website has detailed help and instructions",
-    "responsibility": ["dev"],
+    "responsibility": ["UX","content"],
     "testing": "Testing Strategies"
   },
   "3-3-6": {
     "summary": "Reduce the risk of all input errors",
-    "responsibility": ["dev"],
+    "responsibility": ["dev","UX"],
     "testing": "Testing Strategies"
   },
   "4-1-1": {
@@ -330,7 +330,7 @@ const customData = {
   }
 };
 
-const responsibilities = ['dev','UI','UX','product'];
+const responsibilities = ['dev','UX','content','media','live'];
 
 class App extends Component {
   constructor(props) {
@@ -416,6 +416,13 @@ class App extends Component {
                         </a>
                       </b><br/>
                       {wuhcag_summary}
+                      <div className="responsibilities">
+                        {
+                          data.responsibility.map((name,i) => {
+                            return <span className={`responsibility responsibility_${name}`} key={i}>{name}</span>
+                          })
+                        }
+                      </div>
                       <hr/>
                       Compliance
                       <StarRatingComponent 

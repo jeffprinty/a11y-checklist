@@ -62,3 +62,14 @@ textarea {
   width: 100%;
   height: 100%;
 }
+.responsibilities {
+  padding: 4px;
+}
+.responsibility {
+  padding: 4px;
+  margin: 3px;
+}
+.responsibility_content { background-color: #00ff00 }
+.responsibility_UX { background-color: #0080ff }
+.responsibility_dev { background-color: #00ffff }
+.responsibility_live { background-color: #ff0080 }
