@@ -2,7 +2,7 @@
     "key": "1-1-1",
     "id": "text-equiv-all",
     "title": "Non-text Content",
-    "description": "All non-text content that is presented to the user has a text alternative that serves the equivalent purpose, except for the situations listed below.",
+    "description": "All non-text content that is presented to the user has a text alternative that serves the equivalent purpose",
     "uri": "http://www.w3.org/TR/WCAG20/#text-equiv-all",
     "conformance_level": "A",
     "wuhcag_summary": "Provide text alternatives for non-text content",
@@ -665,7 +665,7 @@
     "wuhcag_summary": "No time limits on your website",
     "wuhcag_detail": "<p>If any of your content is time-controlled, you risk losing users who need more time to read and understand the information on your website.</p>\n<p>Time-controlled content is anything on your website that expires or becomes unusable by your users after a certain time. A common example is giving a user ten minutes to fill in and send a form. There are functional reasons to set time limits, but you must consider all of your users.</p>\n",
     "wuhcag_tips": "",
-    "wuhcag_what_to_do": "<p>This guideline builds on Guideline 2.2.1. That guideline (at the lower Level A standard of compliance) requires you to offer users a chance to turn off or extend time limits. At Level AAA, this guideline requires that you do not set time limits at all (with two exceptions below).</p>\n",
+    "wuhcag_what_to_do": "<p>This guideline builds on Guideline 2.2.1. That guideline (at the lower Level A standard of compliance) requires you to offer users a chance to turn off or extend time limits. At Level AAA, this guideline requires that you do not set time limits at all.</p>\n",
     "wuchcag_exceptions": "<p>You can set a time limit if:</p>\n<ul>\n <li>The time limit is due to real-time events, like bidding in an auction.</li>\n <li>Your content is a live video stream.</li>\n</ul>\n",
     "wuhcag_related": [
         {
@@ -687,7 +687,7 @@
     "wuhcag_summary": "Don't interrupt your users",
     "wuhcag_detail": "<p>Some of your users will have difficulty maintaining their focus and attention; interrupting their experience may impact their understanding of your content. You can avoid this by eliminating interruptions.</p>\n",
     "wuhcag_tips": "<p>The best thing you can do is eliminate all interruptions by default. Allow your users to interact with webpages naturally and don’t try to surprise or manipulate them. If you can't capture your users’ interest without a pop-up, you have bigger problems than Level AAA.</p>\n<p>If you must use a pop-up, make sure that keyboard focus is on the window-closing ‘X’ icon in the corner that closes the pop-up. This means keyboard users can close the new window. When they do close it, return focus to the place on the page they were at before the pop-up appeared.</p>\n",
-    "wuhcag_what_to_do": "<ul>\n <li>Don't use an automatic redirect or refresh function based on a time delay (for example, if a webpage has moved, do not redirect users to the new page after a certain amount of time).</li>\n <li>Provide an option for turning off all but ‘essential’ interruptions (see below).</li>\n</ul>\n",
+    "wuhcag_what_to_do": "<ul>\n <li>Don't use an automatic redirect or refresh function based on a time delay (for example, if a webpage has moved, do not redirect users to the new page after a certain amount of time).</li>\n <li>Provide an option for turning off all but ‘essential’ interruptions.</li>\n</ul>\n",
     "wuchcag_exceptions": "<p>Warnings about a user’s health, safety or the security of their data or property as they are considered ‘essential’ (I’m not sure how a website would know if your house was about to explode, but let’s not ban it from trying to tell you!).</p>\n",
     "wuhcag_related": [
         {

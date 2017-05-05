@@ -82,6 +82,14 @@ td.left {
   text-align: left;
   vertical-align: top;
   font-size: smaller;
+  padding: 8px;
+}
+td.left h2 a {
+  text-decoration: none;
+}
+td.left h2 {
+  -webkit-margin-before:0em;
+  -webkit-margin-after:0em;
 }
 td {
   vertical-align: top;
