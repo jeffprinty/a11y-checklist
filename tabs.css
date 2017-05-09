@@ -33,27 +33,27 @@ p {
 }
 
 .header {
-  width: 110px;
+  width: 90px;
   float: left;
 }
 .tab-content {
-  margin-left: 140px;
+  margin-left: 115px;
   text-align: left;
 }
 
-.react-tabs ul{
+.react-tabs .header ul{
   margin: 0;
   padding: 0;
   list-style-type: none;
 }
 
-.react-tabs ul li {
+.react-tabs .header ul li {
   display: block;
   height: 36px;
   text-align: left;
   box-sizing: border-box;
 }
-.react-tabs ul li a {
+.react-tabs .header ul li a {
   display: block;
   line-height: 18px;
   padding: 8px;
@@ -61,18 +61,19 @@ p {
   text-decoration: none;
   color: #fff;
   background-color: #ffafaf;
+  cursor: pointer;
 }
 
-.react-tabs a {
+.react-tabs .header a {
 }
 
-.react-tabs .selected a {
+.react-tabs .header .selected a {
   background-color: #da1b2c !important;
   color: #fff !important;
   font-weight: bold;
 }
 
-.react-tabs a:hover {
+.react-tabs .header a:hover {
   color: #fff;
   background-color: #a51426;
 }
@@ -83,6 +84,8 @@ td.left {
   vertical-align: top;
   font-size: smaller;
   padding: 8px;
+  width: 140px;
+  max-width: 140px;
 }
 td.left h2 a {
   text-decoration: none;
@@ -111,23 +114,52 @@ tbody tr:nth-child(even) {
 
 textarea {
   width: 100%;
-  height: 100%;
+  min-height: 230px;
 }
 .responsibilities {
   padding: 4px;
   margin-top: 5px;
 }
 .responsibility {
-  padding: 4px;
-  margin-right: 5px;
+  padding: 6px;
+  margin: 0 6px 6px 0;
   border-radius: 4px;
+  float: left;
 }
 .responsibility_content { background-color: #00ff00 }
 .responsibility_UX { background-color: #0080ff }
 .responsibility_dev { background-color: #00ffff }
 .responsibility_live { background-color: #ff0080 }
+.responsibility_phase1 { background-color: #68b75f }
+.responsibility_phase2 { background-color: #5fb79c }
+.responsibility_phase3 { background-color: #45a5b5 }
+.responsibility_phase4 { background-color: #3192d3 }
 
 .summary {
   padding: 8px 4px;
 }
 
+ul.checklist, ul.checklist li {
+  list-style: none;
+  -webkit-margin-before:0em;
+  -webkit-margin-after:0em;
+  -webkit-padding-start: 0;
+}
+.checkbox {
+  margin: 0 4px;
+}
+table.checklist label {
+  user-select: none;
+}
+table.checklist input {
+  margin: 8px 12px;
+  display: inline-block;
+  transform: scale(1.5);
+}
+table.checklist td {
+  vertical-align: middle;
+}
+
+table.output td {
+  text-align: left
+}
