@@ -103,6 +103,8 @@ td {
 table {
   border: none;
   border-collapse: collapse;
+  box-sizing: border-box;
+  width: 100%;
 }
 
 tbody tr:nth-child(odd) {
@@ -160,6 +162,6 @@ table.checklist td {
   vertical-align: middle;
 }
 
-table.output td {
+table.output td,  table.output th {
   text-align: left
 }

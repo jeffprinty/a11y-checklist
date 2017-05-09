@@ -117,7 +117,7 @@ class App extends Component {
     let obj = {};
     let count = 0;
 
-    let jsonResult = [];
+    let reportCard = [];
 
     const keys = wcag.map(item => {
       const newObj = {
@@ -151,7 +151,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Macmillan A11y Assessment Tool</h1>
-        <input type="text" value={ url } />
+        <input type="text" value={ url } onChange={() => this.setState({url})} />
         <div className="checkBar">
           <strong>Filters:  </strong>
           {
@@ -224,13 +224,13 @@ class App extends Component {
 
                 if (!show) return null;
 
-                jsonResult.push({...item, data});
+                reportCard.push({...item, data});
 
-                console.log('length',data.testing.checklist.length);
                 count++;
                 return (
                   <tr key={ key }>
                     <td className="left">
+                      <a name={ key } />
                       <h2>
                         <a href={ uri } target="_new">{key}</a>
                       </h2>
@@ -340,11 +340,17 @@ class App extends Component {
         </div>
         <Count>{ count } items</Count>
         <table className="output">
+          <thead>
+            <tr>
+              <th>Section</th>
+              <th>Status</th>
+            </tr>
+          </thead>
           <tbody>
             {
-              jsonResult.map((item,i) => {
+              reportCard.map((item,i) => {
                 return (
-                  <tr>
+                  <tr key={i}>
                     <td>
                       {item.key} - {item.wuhcag_summary}
                     </td>
@@ -353,7 +359,11 @@ class App extends Component {
                         item.data.testing.checklist.map((check,i) => {
                           const key = `${item.key}_${i}`;
                           const isChecked = this.state.checkValues.includes(key);
-                          return isChecked ? '✔️' : '✖️';
+                          return (
+                            <a href={`#${item.key}`} title={check.replace(/<(?:.|\n)*?>/gm, '')}>
+                              { isChecked ? '✔' : '✖️' }
+                            </a>
+                          )
                         })
                       }
                     </td>
