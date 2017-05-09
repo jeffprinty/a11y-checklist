@@ -4,8 +4,11 @@
   "private": true,
   "homepage": "https://mlazul.github.io/a11y-checklist/",
   "dependencies": {
+    "babel-relay-plugin": "^0.10.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "react-router": "^2.4.1",
+    "react-router-relay": "^0.13.7",
     "react-star-rating-component": "^1.2.4",
     "react-tab-view": "^1.0.5",
     "styled-components": "^1.4.6"
