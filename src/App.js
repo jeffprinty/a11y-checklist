@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Tabs, Tab } from 'react-tab-view'
+import { Tabs, Tab } from 'react-tab-view';
 import StarRatingComponent from 'react-star-rating-component';
 
-import {customData} from './customData.js';
+import { customData, toolData } from './customData.js';
 
 import './App.css';
 
@@ -83,12 +83,21 @@ const Count = styled.div`
 
 const phases = ['phase1','phase2','phase3','phase4']
 
-const checkValuesList = ['onlyBLAR','phase1','phase2','phase3','phase4','dev','UX','content','media','live'];
+const checkValuesList = [
+  'onlyBLAR',
+  'phase1',
+  'phase2',
+  'phase3',
+  'phase4',
+  'dev',
+  'UX',
+  'content',
+  'media',
+  'live'
+];
 const defaultOff = [];//['phase2','phase3','phase4','live'];
 
-const defaultState = checkValuesList.filter(el => {
-  return defaultOff.indexOf(el) < 0
-})
+const defaultState = checkValuesList.filter(el => defaultOff.indexOf(el) < 0)
 
 const cap = (txt) => {
   return txt.charAt(0).toUpperCase() + txt.slice(1,txt.length)
@@ -130,36 +139,27 @@ class App extends Component {
 
   render() {
     const { shortId, checkValues, title, url } = this.state;
-    let obj = {};
     let count = 0;
 
     let reportCard = [];
 
-    wcag.forEach(item => {
-      const newObj = {
-        summary: item.wuhcag_summary,
-        responsibility: "dev",
-        testing: "Testing Strategies",
-        compliance: 2,
-        difficulty: 0,
-      }
-      obj[item.key] = newObj;
-      return newObj;
-    });
 
     return (
       <div className="App">
-        <h1>Macmillan A11y Assessment Tool</h1>
-        <input
-          className="bigInput"
-          type="text"
-          value={ title }
-          onChange={e => this.setState({title: e.target.value})} />
-        <input
-          className="bigInput"
-          type="text"
-          value={ url }
-          onChange={e => this.setState({url: e.target.value})} />
+        <img alt="Narwa11y 'Wally' logo, a rainbow colored narwhal with glasses" className="logo" src="./narwha11y.png" />
+        <h1 className="pageTitle">Narwha11y: Accessibility Assessment Tool</h1>
+        <div className="inputs">
+          <input
+            className="bigInput"
+            type="text"
+            value={ title }
+            onChange={e => this.setState({title: e.target.value})} />
+          <input
+            className="bigInput"
+            type="text"
+            value={ url }
+            onChange={e => this.setState({url: e.target.value})} />
+        </div>
         <input
           type="text"
           value={ shortId }
@@ -249,26 +249,36 @@ class App extends Component {
                         {wuhcag_summary}
                       </div>
                       <hr/>
-                      <b>Compliance</b><br/>
-                      <StarRatingComponent 
-                          name={`${key}_compliance`} 
-                          starCount={5}
-                          value={obj[key].compliance}
-                          onStarClick={() => {}}
-                      />
-                      <br/><b>Difficulty</b><br/>
-                      <StarRatingComponent 
-                          name={`${key}_difficulty`} 
-                          starCount={5}
-                          value={obj[key].difficulty}
-                          onStarClick={() => {}}
-                      />
-                      <hr/>
+                      <div className="hidden">
+                        <b>Compliance</b><br/>
+                        <StarRatingComponent 
+                            name={`${key}_compliance`} 
+                            starCount={5}
+                            value={2}
+                            onStarClick={() => {}}
+                        />
+                        <br/><b>Difficulty</b><br/>
+                        <StarRatingComponent 
+                            name={`${key}_difficulty`} 
+                            starCount={5}
+                            value={3}
+                            onStarClick={() => {}}
+                        />
+                        <hr/>
+                      </div>
+                      <b>Tools</b>
+                      <div className="tags">
+                        {
+                          data.testing.tools.map((tool,i) => {
+                            return <span className={`tag tag_${tool}`} key={i}>{tool}</span>
+                          })
+                        }
+                      </div>
                       <b>Responsibilities</b>
-                      <div className="responsibilities">
+                      <div className="tags">
                         {
                           filterableFields.concat(data.responsibility).map((name,i) => {
-                            return <span className={`responsibility responsibility_${name}`} key={i}>{name}</span>
+                            return <span className={`tag tag_${name}`} key={i}>{name}</span>
                           })
                         }
                       </div>
@@ -276,7 +286,7 @@ class App extends Component {
                     <td>
                       <Tabs
                         defaultIndex={2}
-                        headers={['Testing','Description','Tips','Notes']}>
+                        headers={['Testing','Details','Tips','Notes']}>
                         <Tab>
                           <div>
                             { data.testing.description }
@@ -304,11 +314,28 @@ class App extends Component {
                                 }
                               </tbody>
                             </table>
+                            { data.testing.tools.length > 0 &&
+                              <div>
+                                <b>Tools: </b>
+                                {
+                                  data.testing.tools.map((tool,i) => {
+                                    return <a href={toolData[tool].url} key={i}>{ tool }</a>
+                                  })
+                                }
+                              </div>
+                            }
                           </div>
                         </Tab>
                         <Tab>
                           <div>
                             { description }<br/>
+                            <div className="references">
+                              {
+                                item.references.map((ref,i) => {
+                                  return <a key={i} href={ref.url} target="_new">{ref.title}</a>
+                                })
+                              }
+                            </div>
                             {
                               phases.map((phase,i) => {
                                 if (data[phase] && checkValues.includes(phase)) {

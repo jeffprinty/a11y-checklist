@@ -1,15 +1,23 @@
 
+const colorLink = (url,type) => {
+  return `https://www.toptal.com/designers/colorfilter?orig_uri=${url}&process_type=${type}`
+}
+
+export const toolData = {
+  "tenon": {
+    "url": "http://tenon.io"
+  }
+}
 
 export function customData(key, url) {
-  const protanopia = `https://www.toptal.com/designers/colorfilter?orig_uri=${url}&process_type=protan`;
-  const deutanopia = `https://www.toptal.com/designers/colorfilter?orig_uri=${url}&process_type=deutan`;
-  const tritanopia = `https://www.toptal.com/designers/colorfilter?orig_uri=${url}&process_type=tritan`;
   const dataHash = {
     "1-1-1": {
       "summary": "Provide text alternatives for non-text content",
       "responsibility": ["dev","UX"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": true,
+        "tools":["tenon"],
         "checklist": [
           "Make sure placeholder attributes are NOT being used in place of label tags.",
           "If non-text content is a control or accepts user input, then it has a name that describes its purpose.",
@@ -25,7 +33,9 @@ export function customData(key, url) {
       "summary": "Provide an alternative to video-only and audio-only content",
       "responsibility": ["content"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": false,
+        "tools": [],
         "checklist": [
 
         ]
@@ -36,7 +46,9 @@ export function customData(key, url) {
       "summary": "Provide captions for videos with audio",
       "responsibility": ["content"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": false,
+        "tools": [],
         "checklist": [
 
         ]
@@ -47,7 +59,9 @@ export function customData(key, url) {
       "summary": "Video with audio has a second alternative",
       "responsibility": ["content","UX"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": false,
+        "tools": [],
         "checklist": [
 
         ]
@@ -58,7 +72,9 @@ export function customData(key, url) {
       "summary": "Live Video with audio has a second alternative",
       "responsibility": ["content","live"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": false,
+        "tools": [],
         "checklist": [
 
         ]
@@ -68,7 +84,9 @@ export function customData(key, url) {
       "summary": "Users have access to audio description for video content",
       "responsibility": ["content"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": false,
+        "tools": [],
         "checklist": [
 
         ]
@@ -79,7 +97,9 @@ export function customData(key, url) {
       "summary": "Provide sign language translations for videos",
       "responsibility": ["content"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": false,
+        "tools": [],
         "checklist": [
 
         ]
@@ -89,7 +109,9 @@ export function customData(key, url) {
       "summary": "Provide extended audio description for videos",
       "responsibility": ["content"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": false,
+        "tools": [],
         "checklist": [
 
         ]
@@ -100,7 +122,9 @@ export function customData(key, url) {
       "summary": "Provide a text alternative to your videos",
       "responsibility": ["content","UX"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": false,
+        "tools": [],
         "checklist": [
 
         ]
@@ -110,7 +134,9 @@ export function customData(key, url) {
       "summary": "Provide alternatives for live audio",
       "responsibility": ["live","content"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": false,
+        "tools": [],
         "checklist": [
 
         ]
@@ -120,7 +146,9 @@ export function customData(key, url) {
       "summary": "Structure your website logically",
       "responsibility": ["dev","UX"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": true,
+        "tools":["tenon"],
         "checklist": [
           `Required <a href="${url}">form fields</a> are labelled accordingly`,
           "Checkboxes can be programmatically determined",
@@ -144,7 +172,9 @@ export function customData(key, url) {
       "summary": "Present your website content in a meaningful order",
       "responsibility": ["dev","UX"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": true,
+        "tools":["tenon"],
         "checklist": [
           "Use tabindex responsibly",
           `<a target="_new" href="http://www.w3.org/TR/WCAG20-TECHS/C27.html">C27: Making the DOM order match the visual order</a>`
@@ -158,7 +188,9 @@ export function customData(key, url) {
       "summary": "Use more than one sense for instructions",
       "responsibility": ["dev","UX","content"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": false,
+        "tools": [],
         "checklist": [
           `<a target="_new" href="http://www.w3.org/TR/WCAG20-TECHS/G96.html">G96: Providing textual identification of items that otherwise rely only on sensory information to be understood</a>`
         ]
@@ -168,11 +200,13 @@ export function customData(key, url) {
       "summary": "Don’t use presentation that relies solely on colour",
       "responsibility": ["dev","UX"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": false,
+        "tools": [],
         "checklist": [
-          `<a href="${deutanopia}" target="_new">Check your site for deutanopia</a>`,
-          `<a href="${protanopia}" target="_new">Check your site for protanopia</a>`,
-          `<a href="${tritanopia}" target="_new">Check your site for tritanopia</a>`,
+          `<a href="${colorLink(url,'deutan')}" target="_new">Check your site for deutanopia</a>`,
+          `<a href="${colorLink(url,'protan')}" target="_new">Check your site for protanopia</a>`,
+          `<a href="${colorLink(url,'tritan')}" target="_new">Check your site for tritanopia</a>`,
           `Use your site with the <a href="http://daltonize.appspot.com/" target="_new">Daltonize bookmarklets</a>`,
           `<a target="_new" href="http://www.w3.org/TR/WCAG20-TECHS/G14.html">G14: Ensuring that information conveyed by color differences is also available in text</a>`,
           `<a target="_new" href="http://www.w3.org/TR/WCAG20-TECHS/C15.html">C15: Using CSS to change the presentation of a user interface component when it receives focus</a>`
@@ -186,7 +220,9 @@ Color Contrast in Key Images  Design graphics so that pertinent content will not
       "summary": "Don’t play audio automatically",
       "responsibility": ["dev","UX"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": false,
+        "tools": [],
         "checklist": [
           "Audio does not play automatically"
         ]
@@ -197,7 +233,9 @@ Color Contrast in Key Images  Design graphics so that pertinent content will not
       "summary": "Contrast ratio between your text and background is at least 4.5:1",
       "responsibility": ["dev",'UX'],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": false,
+        "tools": [],
         "checklist": [
           `Use <a href="https://macmillanlearning.atlassian.net/wiki/display/CDL/Accessible+Combinations">CDL Accessible Combinations</a>`,
           `Check website contrast with <a href="http://www.checkmycolours.com/img/logo.jpg">checkmycolours.com</a>.`
@@ -215,7 +253,9 @@ Using a contrast ratio tool, choose text color and text background color so that
       "summary": "Text can be resized to 200% without loss of content or function",
       "responsibility": ["dev","UX"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": false,
+        "tools": [],
         "checklist": [
           `Check website contrast with <a href="http://www.checkmycolours.com/img/logo.jpg">checkmycolours.com</a>.`
 
@@ -227,7 +267,9 @@ Using a contrast ratio tool, choose text color and text background color so that
       "summary": "Don't use images of text",
       "responsibility": ["dev","content","UX"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": true,
+        "tools":["tenon"],
         "checklist": [
           "Test your site to make sure it still works when zoomed up to 200%"
         ]
@@ -241,7 +283,9 @@ Using a contrast ratio tool, choose text color and text background color so that
       "summary": "Contrast ratio between your text and background is at least 7:1",
       "responsibility": ["dev","UX"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": false,
+        "tools": [],
         "checklist": [
           `Check website contrast with <a href="http://www.checkmycolours.com/img/logo.jpg">checkmycolours.com</a>.`
         ]
@@ -251,7 +295,9 @@ Using a contrast ratio tool, choose text color and text background color so that
       "summary": "Your audio is clear for listeners to hear",
       "responsibility": ["content"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": true,
+        "tools":["tenon"],
         "checklist": [
 
         ]
@@ -262,7 +308,9 @@ Using a contrast ratio tool, choose text color and text background color so that
       "summary": "Offer users a range of presentation options",
       "responsibility": ["dev"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": true,
+        "tools":["tenon"],
         "checklist": [
 
         ]
@@ -272,7 +320,9 @@ Using a contrast ratio tool, choose text color and text background color so that
       "summary": "Don't use images of text",
       "responsibility": ["dev","UX","content"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": false,
+        "tools": [],
         "checklist": [
 
         ]
@@ -282,7 +332,9 @@ Using a contrast ratio tool, choose text color and text background color so that
       "summary": "Accessible by keyboard only",
       "responsibility": ["dev","UX"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": true,
+        "tools":["tenon"],
         "checklist": [
           "Site structure makes sense without a mouse",
           "Hide your mouse and use your app"
@@ -294,7 +346,9 @@ Using a contrast ratio tool, choose text color and text background color so that
       "summary": "Your website must not trap keyboard users",
       "responsibility": ["dev","UX"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": true,
+        "tools":["tenon"],
         "checklist": [
           "Navigate to all modal dialogs and ensure that they can be used exclusively with a keyboard"
         ]
@@ -305,7 +359,9 @@ Using a contrast ratio tool, choose text color and text background color so that
       "summary": "Your website is accessible by keyboard only, without exception",
       "responsibility": ["dev"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": true,
+        "tools":["tenon"],
         "checklist": [
 
         ]
@@ -315,7 +371,9 @@ Using a contrast ratio tool, choose text color and text background color so that
       "summary": "Time limits have user controls",
       "responsibility": ["dev","UX"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": true,
+        "tools":["tenon"],
         "checklist": [
 
         ]
@@ -328,7 +386,9 @@ Using a contrast ratio tool, choose text color and text background color so that
       "summary": "Provide user controls for moving content",
       "responsibility": ["dev","UX"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": false,
+        "tools": [],
         "checklist": [
 
         ]
@@ -342,7 +402,9 @@ Using a contrast ratio tool, choose text color and text background color so that
       "summary": "No time limits on your website",
       "responsibility": ["dev","UX"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": false,
+        "tools": [],
         "checklist": [
 
         ]
@@ -352,7 +414,9 @@ Using a contrast ratio tool, choose text color and text background color so that
       "summary": "Don't interrupt your users",
       "responsibility": ["dev","UX"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": true,
+        "tools":["tenon"],
         "checklist": [
 
         ]
@@ -362,7 +426,9 @@ Using a contrast ratio tool, choose text color and text background color so that
       "summary": "Save user data when re-authenticating",
       "responsibility": ["dev"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": false,
+        "tools": [],
         "checklist": [
 
         ]
@@ -372,7 +438,9 @@ Using a contrast ratio tool, choose text color and text background color so that
       "summary": "No content flashes more than three times per second",
       "responsibility": ["dev","UX"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": true,
+        "tools":["tenon"],
         "checklist": [
 
         ]
@@ -383,7 +451,9 @@ Using a contrast ratio tool, choose text color and text background color so that
       "summary": "No content flashes more than three times per second",
       "responsibility": ["dev","UX"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": true,
+        "tools":["tenon"],
         "checklist": [
 
         ]
@@ -394,7 +464,9 @@ Using a contrast ratio tool, choose text color and text background color so that
       "summary": "Provide a ‘Skip to Content’ link",
       "responsibility": ["dev","UX"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": true,
+        "tools":["tenon"],
         "checklist": [
           `<a href="http://www.w3.org/TR/WCAG20-TECHS/G1.html">G1: Adding a link at the top of each page that goes directly to the main content area</a>`
         ]
@@ -405,7 +477,9 @@ Using a contrast ratio tool, choose text color and text background color so that
       "summary": "Break up content with headings",
       "responsibility": ["dev","UX"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": true,
+        "tools":["tenon"],
         "checklist": [
           "Test your site with JAWS",
           "Test your site with NVDA",
@@ -417,7 +491,9 @@ Using a contrast ratio tool, choose text color and text background color so that
       "summary": "Use helpful and clear page titles",
       "responsibility": ["dev","UX"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": true,
+        "tools":["tenon"],
         "checklist": [
           `<a href="http://www.w3.org/TR/WCAG20-TECHS/G88.html">G88: Providing descriptive titles for Web pages</a>`
         ]
@@ -431,7 +507,9 @@ Using a contrast ratio tool, choose text color and text background color so that
       "summary": "Pages work in a logical order",
       "responsibility": ["dev","UX"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": true,
+        "tools":["tenon"],
         "checklist": [
           `<a target="_new" href="http://www.w3.org/TR/WCAG20-TECHS/H4.html">Create a logical tab order through links, form controls, and objects</a>`,
           `Use tabindex properly`,
@@ -443,7 +521,9 @@ Using a contrast ratio tool, choose text color and text background color so that
       "summary": "Every link's purpose is clear from its context",
       "responsibility": ["dev","UX"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": true,
+        "tools":["tenon"],
         "checklist": [
           "Make sure link text is descriptive",
 
@@ -461,7 +541,9 @@ Using a contrast ratio tool, choose text color and text background color so that
       "summary": "Offer several ways to find pages on your website",
       "responsibility": ["dev","UX"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": false,
+        "tools": [],
         "checklist": [
 
         ]
@@ -471,7 +553,9 @@ Using a contrast ratio tool, choose text color and text background color so that
       "summary": "Use clear headings and labels",
       "responsibility": ["dev","UX"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": true,
+        "tools":["tenon"],
         "checklist": [
           `<a target="_new" href="http://www.w3.org/TR/WCAG20-TECHS/G130.html">G130: Providing descriptive headings</a>`,
           `<a target="_new" href="http://www.w3.org/TR/WCAG20-TECHS/G131.html">G131: Providing descriptive labels</a>`
@@ -482,7 +566,9 @@ Using a contrast ratio tool, choose text color and text background color so that
       "summary": "Ensure keyboard focus is visible and clear",
       "responsibility": ["dev","UX"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": false,
+        "tools": [],
         "checklist": [
           `<a target="_new" href="http://www.w3.org/TR/WCAG20-TECHS/G149.html">G149: Using user interface components that are highlighted by the user agent when they receive focus</a>`,
           `<a target="_new" href="http://www.w3.org/TR/WCAG20-TECHS/C15.html">C15: Using CSS to change the presentation of a user interface component when it receives focus</a>`,
@@ -495,7 +581,9 @@ Using a contrast ratio tool, choose text color and text background color so that
       "summary": "Let users know where they are on your website",
       "responsibility": ["dev","UX"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": false,
+        "tools": [],
         "checklist": [
 
         ]
@@ -505,7 +593,9 @@ Using a contrast ratio tool, choose text color and text background color so that
       "summary": "Every link's purpose is clear from its text",
       "responsibility": ["dev","UX"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": true,
+        "tools":["tenon"],
         "checklist": [
 
         ]
@@ -516,7 +606,9 @@ Using a contrast ratio tool, choose text color and text background color so that
       "summary": "Every page of your website has a language assigned",
       "responsibility": ["dev","UX"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": true,
+        "tools":["tenon"],
         "checklist": [
           `<a target="_new" href="http://www.w3.org/TR/WCAG20-TECHS/H57.html">H57: Using language attributes on the html element</a>`
         ]
@@ -527,7 +619,9 @@ Using a contrast ratio tool, choose text color and text background color so that
       "summary": "Tell users when the language on a page changes",
       "responsibility": ["dev","UX"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": false,
+        "tools": [],
         "checklist": [
 
         ]
@@ -538,7 +632,9 @@ Using a contrast ratio tool, choose text color and text background color so that
       "summary": "Explain any strange words",
       "responsibility": ["dev","UX"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": false,
+        "tools": [],
         "checklist": [
 
         ]
@@ -548,7 +644,9 @@ Using a contrast ratio tool, choose text color and text background color so that
       "summary": "Explain any abbreviations",
       "responsibility": ["content"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": false,
+        "tools": [],
         "checklist": [
 
         ]
@@ -558,7 +656,9 @@ Using a contrast ratio tool, choose text color and text background color so that
       "summary": "Users with nine years of school can read your content",
       "responsibility": ["content"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": false,
+        "tools": [],
         "checklist": [
 
         ]
@@ -568,7 +668,9 @@ Using a contrast ratio tool, choose text color and text background color so that
       "summary": "Explain any words that are hard to pronounce",
       "responsibility": ["content"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": false,
+        "tools": [],
         "checklist": [
 
         ]
@@ -578,7 +680,9 @@ Using a contrast ratio tool, choose text color and text background color so that
       "summary": "Elements do not change when they receive focus",
       "responsibility": ["dev","UX"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": false,
+        "tools": [],
         "checklist": [
           `<a target="_new" href="http://www.w3.org/TR/WCAG20-TECHS/G107.html">G107: Using &quot;activate&quot; rather than &quot;focus&quot; as a trigger for changes of context</a>`
         ]
@@ -592,7 +696,9 @@ Using a contrast ratio tool, choose text color and text background color so that
       "summary": "Elements do not change when they receive input",
       "responsibility": ["dev","UX"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": false,
+        "tools": [],
         "checklist": [
           `<a target="_new" href="http://www.w3.org/TR/WCAG20-TECHS/G80.html">G80: Providing a submit button to initiate a change of context</a>`,
           `<a target="_new" href="http://www.w3.org/TR/WCAG20-TECHS/G13.html">G13: Describing what will happen before a change to a form control that causes a change of context to occur is made</a>`
@@ -603,7 +709,9 @@ Using a contrast ratio tool, choose text color and text background color so that
       "summary": "Use menus in the same place across your website",
       "responsibility": ["dev","UX"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": false,
+        "tools": [],
         "checklist": [
 
         ]
@@ -613,7 +721,9 @@ Using a contrast ratio tool, choose text color and text background color so that
       "summary": "Use menus in the same place across your website",
       "responsibility": ["dev","UX"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": false,
+        "tools": [],
         "checklist": [
 
         ]
@@ -623,7 +733,9 @@ Using a contrast ratio tool, choose text color and text background color so that
       "summary": "Don’t change elements on your website until users ask",
       "responsibility": ["dev","UX"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": true,
+        "tools":["tenon"],
         "checklist": [
 
         ]
@@ -633,7 +745,9 @@ Using a contrast ratio tool, choose text color and text background color so that
       "summary": "Clearly identify input errors",
       "responsibility": ["dev","UX"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": false,
+        "tools": [],
         "checklist": [
 
         ]
@@ -643,7 +757,9 @@ Using a contrast ratio tool, choose text color and text background color so that
       "summary": "Label elements and give instructions",
       "responsibility": ["dev","UX"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": true,
+        "tools":["tenon"],
         "checklist": [
 
         ]
@@ -653,7 +769,9 @@ Using a contrast ratio tool, choose text color and text background color so that
       "summary": "Suggest fixes when users make errors",
       "responsibility": ["dev","UX"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": false,
+        "tools": [],
         "checklist": [
 
         ]
@@ -663,7 +781,9 @@ Using a contrast ratio tool, choose text color and text background color so that
       "summary": "Reduce the risk of input errors for sensitive data",
       "responsibility": ["dev","UX"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": false,
+        "tools": [],
         "checklist": [
 
         ]
@@ -673,7 +793,9 @@ Using a contrast ratio tool, choose text color and text background color so that
       "summary": "Your website has detailed help and instructions",
       "responsibility": ["UX","content"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": false,
+        "tools": [],
         "checklist": [
 
         ]
@@ -683,7 +805,9 @@ Using a contrast ratio tool, choose text color and text background color so that
       "summary": "Reduce the risk of all input errors",
       "responsibility": ["dev","UX"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": false,
+        "tools": [],
         "checklist": [
 
         ]
@@ -693,7 +817,9 @@ Using a contrast ratio tool, choose text color and text background color so that
       "summary": "Your website has no major code errors",
       "responsibility": ["dev"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": true,
+        "tools":["tenon"],
         "checklist": [
           `Use eslint or similar to check your code for errors`
         ]
@@ -704,7 +830,9 @@ Using a contrast ratio tool, choose text color and text background color so that
       "summary": "Build all elements for accessibility",
       "responsibility": ["dev"],
       "testing": {
-        "description": "Testing",
+        "description": "",
+        "automatable": true,
+        "tools":["tenon"],
         "checklist": [
           `Use and contribute to the <a href="https://github.com/mlazul/ml-a11y-cdl-components" target="_new">Macmillan a11y Component Library</a>`
         ]
