@@ -118,7 +118,7 @@ class App extends Component {
       checkValues, title, url
     };
 
-    fetch(`http://0.0.0.0:3001/api/update/${shortId}`, {
+    fetch(`./api/update/${shortId}`, {
       method: 'post',
       headers: {
         'Accept': 'application/json, text/plain, */*',

@@ -2,7 +2,7 @@
   "name": "wcag-list",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://mlazul.github.io/a11y-checklist/",
+  "homepage": "http://54.70.239.42",
   "dependencies": {
     "babel-relay-plugin": "^0.10.0",
     "react": "^15.5.4",
