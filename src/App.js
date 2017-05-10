@@ -99,7 +99,9 @@ class App extends Component {
     super(props)
     this.state = {
       checkValues: defaultState,
-      url: 'http://www.macmillanlearning.com/catalog'
+      title: 'Untitled a11y Assessment',
+      url: 'http://www.macmillanlearning.com/catalog',
+      shortId: 'BJCCEAJgZ'
     }
   }
 
@@ -108,18 +110,32 @@ class App extends Component {
     const node = document;
     checked = node.querySelectorAll('input[type="checkbox"]:checked');
     const checkValues =  Array.prototype.map.call(checked, function (e) {return e.value;});
-    console.log("checkValues", checkValues);
     this.setState({ checkValues });
+  }
+  update = (id) => {
+    const { checkValues, title, url, shortId } = this.state;
+    const data = {
+      checkValues, title, url
+    };
+
+    fetch(`http://0.0.0.0:3001/api/update/${shortId}`, {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    }).then(res => console.log(res))
   }
 
   render() {
-    const { checkValues, url } = this.state;
+    const { shortId, checkValues, title, url } = this.state;
     let obj = {};
     let count = 0;
 
     let reportCard = [];
 
-    const keys = wcag.map(item => {
+    wcag.forEach(item => {
       const newObj = {
         summary: item.wuhcag_summary,
         responsibility: "dev",
@@ -131,29 +147,25 @@ class App extends Component {
       return newObj;
     });
 
-
-    const json = wcag.filter(ii => ii.conformance_level !== 'AAA').map((item,i) => {
-      const phases = Object.keys(customData(item.key)).filter(key => {
-        return /^phase/.test(key);
-      });
-
-      const { key, wuhcag_summary:summary } = item;
-      const { responsibility } = customData(key);
-      return {
-        key, summary,
-        responsibility: responsibility.toString(),
-        phases: phases.toString()
-      }
-    })
-    //console.log(JSON.stringify(json))
-
-    //console.log(JSON.stringify(obj, null, 2));
     return (
       <div className="App">
         <h1>Macmillan A11y Assessment Tool</h1>
-        <input type="text" value={ url } onChange={() => this.setState({url})} />
+        <input
+          className="bigInput"
+          type="text"
+          value={ title }
+          onChange={e => this.setState({title: e.target.value})} />
+        <input
+          className="bigInput"
+          type="text"
+          value={ url }
+          onChange={e => this.setState({url: e.target.value})} />
+        <input
+          type="text"
+          value={ shortId }
+          onChange={e => this.setState({shortId: e.target.value})} />
         <div className="checkBar">
-          <strong>Filters:  </strong>
+          <strong>Filters: </strong>
           {
             checkValuesList.map((item,i) => {
               return (
@@ -189,8 +201,7 @@ class App extends Component {
                   conformance_level,
                   wuhcag_summary,
                   wuhcag_detail,
-                  wuhcag_tips,
-                  wuhcag_exceptions
+                  wuhcag_tips
                 } = item;
                 const data = customData(key,'http://www.macmillanlearning.com/catalog');
                 if (conformance_level === "AAA") return null;
@@ -309,7 +320,7 @@ class App extends Component {
                                       <div dangerouslySetInnerHTML={{__html: data[phase] }} />
                                     </div>
                                   )
-                                }
+                                } else return null
                               })
                             }
                           </div>
@@ -339,6 +350,8 @@ class App extends Component {
         <div>
         </div>
         <Count>{ count } items</Count>
+        <button onClick={ this.update }>Update</button>
+        <h3>Report Card</h3>
         <table className="output">
           <thead>
             <tr>
@@ -360,7 +373,7 @@ class App extends Component {
                           const key = `${item.key}_${i}`;
                           const isChecked = this.state.checkValues.includes(key);
                           return (
-                            <a href={`#${item.key}`} title={check.replace(/<(?:.|\n)*?>/gm, '')}>
+                            <a key={i} href={`#${item.key}`} title={check.replace(/<(?:.|\n)*?>/gm, '')}>
                               { isChecked ? '✔' : '✖️' }
                             </a>
                           )

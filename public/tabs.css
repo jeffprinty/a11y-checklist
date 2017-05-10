@@ -3,6 +3,11 @@ p {
   -webkit-margin-before:0em;
   -webkit-margin-after:0em;
 }
+input.bigInput {
+  width: 100%;
+  font-size: 24pt;
+  padding: 8px;
+}
 .checkBar {
   height: 40px;
   background-color: #da1b2c;
