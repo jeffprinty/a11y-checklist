@@ -18,7 +18,6 @@ class List extends Component {
     })
     .then(res => res.json())
     .then(res => {
-      console.log("res", res);
       this.setState({assessmentArray: res});
     })
   }
@@ -27,15 +26,19 @@ class List extends Component {
     const { assessmentArray } = this.state;
     return (
       <div className="App">
-        <ul>
-          { assessmentArray.map((item,i) => {
-            return (
-              <li>
-                <a href={`/${item.shortId}`}>{item.title}</a>
-              </li>
-            )
-          })}
-        </ul>
+        <table>
+          <tbody>
+            { assessmentArray.map((item,i) => {
+              return (
+                <tr key={i}>
+                  <td>
+                    <a href={`/${item.shortId}`}>{item.title}</a>
+                  </td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
       </div>
     );
   }
