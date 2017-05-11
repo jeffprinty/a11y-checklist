@@ -59,11 +59,6 @@ const StyledCheckbox = styled.span`
   }
 `;
 
-const Count = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
-`;
 
 // const Selector = ({name}) => {
 //   const selectId = name.toLowerCase();
@@ -146,24 +141,32 @@ class App extends Component {
 
     return (
       <div className="App">
-        <img alt="Narwa11y 'Wally' logo, a rainbow colored narwhal with glasses" className="logo" src="./narwha11y.png" />
-        <h1 className="pageTitle">Narwha11y: Accessibility Assessment Tool</h1>
-        <div className="inputs">
+        <div className="flexRow">
+          <div className="flexRow">
+            <img alt="Narwa11y 'Wally' logo, a rainbow colored narwhal with glasses" className="logo" src="./narwha11y.png" />
+            <h1 className="pageTitle">Narwha11y: Accessibility Assessment Tool</h1>
+          </div>
+          <div className="mainButtons">
+            <input
+              type="text"
+              className="shortId"
+              value={ shortId }
+              onChange={e => this.setState({shortId: e.target.value})} />
+            <button>Create Assessment</button>
+          </div>
+        </div>
+        <div className="flexRow">
           <input
-            className="bigInput"
+            className="bigInput wide"
             type="text"
             value={ title }
             onChange={e => this.setState({title: e.target.value})} />
           <input
-            className="bigInput"
+            className="bigInput wide"
             type="text"
             value={ url }
             onChange={e => this.setState({url: e.target.value})} />
         </div>
-        <input
-          type="text"
-          value={ shortId }
-          onChange={e => this.setState({shortId: e.target.value})} />
         <div className="checkBar">
           <strong>Filters: </strong>
           {
@@ -288,43 +291,46 @@ class App extends Component {
                         defaultIndex={2}
                         headers={['Testing','Details','Tips','Notes']}>
                         <Tab>
-                          <div>
-                            { data.testing.description }
-                            <table className="checklist">
-                              <tbody>
-                                {
-                                  data.testing.checklist.map((check,i) => {
-                                    return (
-                                      <tr key={i}>
-                                        <td className="checkbox">
-                                          <input
-                                            id={`checklist_${key}_${i}`}
-                                            onChange={this.checkToggle.bind(this)}
-                                            value={`${key}_${i}`}
-                                            type="checkbox"/>
-                                        </td>
-                                        <td>
-                                          <label
-                                            htmlFor={`checklist_${key}_${i}`}
-                                            dangerouslySetInnerHTML={{ __html: check }} />
-                                        </td>
-                                      </tr>
-                                    )
-                                  })
-                                }
-                              </tbody>
-                            </table>
-                            { data.testing.tools.length > 0 &&
-                              <div>
-                                <b>Tools: </b>
-                                {
-                                  data.testing.tools.map((tool,i) => {
-                                    return <a href={toolData[tool].url} key={i}>{ tool }</a>
-                                  })
-                                }
-                              </div>
-                            }
-                          </div>
+                          { data.testing.checklist.length === 0 ? <h2>No procedures added yet</h2> : 
+                            <div>
+                              <h2>Testing Procedures</h2>
+                              { data.testing.description }
+                              <table className="checklist">
+                                <tbody>
+                                  {
+                                    data.testing.checklist.map((check,i) => {
+                                      return (
+                                        <tr key={i}>
+                                          <td className="checkbox">
+                                            <input
+                                              id={`checklist_${key}_${i}`}
+                                              onChange={this.checkToggle.bind(this)}
+                                              value={`${key}_${i}`}
+                                              type="checkbox"/>
+                                          </td>
+                                          <td>
+                                            <label
+                                              htmlFor={`checklist_${key}_${i}`}
+                                              dangerouslySetInnerHTML={{ __html: check }} />
+                                          </td>
+                                        </tr>
+                                      )
+                                    })
+                                  }
+                                </tbody>
+                              </table>
+                              { data.testing.tools.length > 0 &&
+                                <div>
+                                  <b>Tools: </b>
+                                  {
+                                    data.testing.tools.map((tool,i) => {
+                                      return <a href={toolData[tool].url} key={i}>{ tool }</a>
+                                    })
+                                  }
+                                </div>
+                              }
+                            </div>
+                          }
                         </Tab>
                         <Tab>
                           <div>
@@ -376,7 +382,7 @@ class App extends Component {
         </table>
         <div>
         </div>
-        <Count>{ count } items</Count>
+        <span>{ count } items</span>
         <button onClick={ this.update }>Update</button>
         <h3>Report Card</h3>
         <table className="output">
