@@ -84,11 +84,12 @@ const cap = (txt) => {
 class Main extends Component {
   constructor(props) {
     super(props)
+    const shortId = props.location.pathname.replace(/\//ig,'');
     this.state = {
       checkValues: defaultState,
-      title: 'Untitled a11y Assessment',
+      title: 'New Assessment',
       url: 'http://www.macmillanlearning.com/catalog',
-      shortId: this.props.location
+      shortId 
     }
   }
 
@@ -122,7 +123,6 @@ class Main extends Component {
     })
     .then(res => res.json())
     .then(res => {
-        console.log("res", res);
       this.setState(res);
     }).catch(err => {
       console.log("err", err);
@@ -135,8 +135,6 @@ class Main extends Component {
     let count = 0;
 
     let reportCard = [];
-    console.log('params',this.props);
-
     return (
       <div className="App">
         <div className="flexRow">

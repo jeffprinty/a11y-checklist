@@ -13,7 +13,7 @@ class List extends Component {
 
 
   componentDidMount() {
-    fetch(`${pageUrl}/api${this.props.location.pathname}`, {
+    fetch(`${pageUrl}/api`, {
       method: 'get'
     })
     .then(res => res.json())
