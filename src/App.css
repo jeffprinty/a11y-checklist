@@ -49,7 +49,7 @@ input[type=text].shortId {
   display: none;
 }
 input[type=text] {
-  font-size: 18pt;
+  font-size: 16pt;
   padding: 8px;
 }
 input.bigInput {
@@ -57,6 +57,19 @@ input.bigInput {
 input.bigInput.wide {
   flex: 1;
 }
+select {
+  font-size: 16pt;
+  padding: 8px;
+}
+
+.assessmentDetails {
+
+}
+.assessmentDetails label {
+  padding: 0 8px;
+  font-weight: bold;
+}
+
 .checkBar {
   height: 40px;
   background-color: #da1b2c;
@@ -243,4 +256,19 @@ button {
   border: 0;
   border-radius: 6px;
   margin: 0 8px;
+}
+nav.mainButtons li {
+  list-style: none;
+  display: inline;
+}
+nav.mainButtons a {
+  margin: 6px;
+  padding: 8px;
+  background-color: #da1b2c;
+  border-radius: 6px;
+  text-decoration: none;
+  color: #f8f8ff;
+}
+nav.mainButtons li:hover {
+  opacity: 0.8;
 }

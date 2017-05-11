@@ -89,7 +89,8 @@ class Main extends Component {
       checkValues: defaultState,
       title: 'New Assessment',
       url: 'http://www.macmillanlearning.com/catalog',
-      shortId 
+      shortId,
+      teams: ['teamA','teamB']
     }
   }
 
@@ -123,6 +124,7 @@ class Main extends Component {
     })
     .then(res => res.json())
     .then(res => {
+      console.log("res", res);
       this.setState(res);
     }).catch(err => {
       console.log("err", err);
@@ -131,23 +133,38 @@ class Main extends Component {
   }
 
   render() {
-    const { shortId, checkValues, title, url } = this.state;
+    const { shortId, checkValues, title, url, teams } = this.state;
+    console.log("teams", teams);
     let count = 0;
 
     let reportCard = [];
     return (
       <div className="App">
-        <div className="flexRow">
-          <input
-            className="bigInput wide"
-            type="text"
-            value={ title }
-            onChange={e => this.setState({title: e.target.value})} />
-          <input
-            className="bigInput wide"
-            type="text"
-            value={ url }
-            onChange={e => this.setState({url: e.target.value})} />
+        <div className="assessmentDetails">
+          <div className="flexRow">
+            <label htmlFor="titleInput">Title</label>
+            <input
+              className="bigInput wide"
+              id="titleInput"
+              type="text"
+              value={ title }
+              onChange={e => this.setState({title: e.target.value})} />
+            <label htmlFor="teamSelect">Team</label>
+            <select id="teamSelect">
+              {
+                teams.map((team,i) => <option key={i} value={team.shortId}>{team.name}</option>)
+              }
+            </select>
+          </div>
+          <div className="flexRow">
+            <label htmlFor="urlInput">URL</label>
+            <input
+              className="bigInput wide"
+              id="urlInput"
+              type="text"
+              value={ url }
+              onChange={e => this.setState({url: e.target.value})} />
+          </div>
         </div>
         <div className="checkBar">
           <strong>Filters: </strong>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Team from './Team';
 
 import './App.css';
 const pageUrl = 'http://54.70.239.42';
@@ -39,6 +40,7 @@ class List extends Component {
             })}
           </tbody>
         </table>
+        <Team />
       </div>
     );
   }
