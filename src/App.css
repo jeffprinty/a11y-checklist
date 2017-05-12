@@ -272,6 +272,10 @@ nav.mainButtons a {
 nav.mainButtons li:hover {
   opacity: 0.8;
 }
+.assessmentList a.check {
+  text-decoration: none;
+  margin-right: 2px;
+}
 .assessmentList td, .assessmentList th {
   text-align: left;
   padding: 8px 12px;

@@ -33,6 +33,7 @@ class List extends Component {
             <tr>
               <th>Assessment Title</th>
               <th>Team</th>
+              <th>Checked</th>
               <th>Updated</th>
             </tr>
           </thead>
@@ -46,6 +47,18 @@ class List extends Component {
                   </td>
                   <td>
                     {item.team}
+                  </td>
+                  <td>
+                    {
+                      item.checkedItems.map((check,i) => (
+                        <a
+                          key={i}
+                          className="check"
+                          href={`/${item.shortId}#${check}`}>
+                          ✔
+                        </a>
+                      ))
+                    }
                   </td>
                   <td>
                     {moment(item.updatedAt).fromNow()}

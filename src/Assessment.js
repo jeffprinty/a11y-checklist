@@ -88,6 +88,7 @@ class Main extends Component {
     this.state = {
       status: '',
       checkValues: defaultState,
+      checkedItems: [],
       title: 'New Assessment',
       url: 'http://www.macmillanlearning.com/catalog',
       team: '',
@@ -98,18 +99,38 @@ class Main extends Component {
       ]
     }
   }
+  componentDidMount() {
+    fetch(`${pageUrl}/api${this.props.location.pathname}`, {
+      method: 'get'
+    })
+    .then(res => res.json())
+    .then(res => {
+      console.log("got data", res);
+      this.setState(res);
+    }).catch(err => {
+      console.log("err", err);
+
+    })
+  }
 
   checkToggle = (e) => {
-    let checked;
     const node = document;
-    checked = node.querySelectorAll('input[type="checkbox"]:checked');
+    let checkedFilterElements = node.querySelectorAll('.checkBar input[type="checkbox"]:checked');
+    const checkedFilters =  Array.prototype.map.call(checkedFilterElements, function (e) {return e.value;});
+    console.log("checkedFilters", checkedFilters);
+    
+    let checkedChecklistElements = node.querySelectorAll('.checklist input[type="checkbox"]:checked');
+    const checkedItems =  Array.prototype.map.call(checkedChecklistElements, function (e) {return e.value;});
+    console.log("checkedItems", checkedItems);
+    
+    let checked = node.querySelectorAll('input[type="checkbox"]:checked');
     const checkValues =  Array.prototype.map.call(checked, function (e) {return e.value;});
-    this.setState({ checkValues });
+    this.setState({ checkValues, checkedItems });
   }
   update = (id) => {
-    const { checkValues, title, url, shortId, team } = this.state;
+    const { checkValues, checkedItems, title, url, shortId, team } = this.state;
     const data = {
-      checkValues, title, url, team,
+      checkValues, checkedItems, title, url, team,
       updatedAt: Date.now()
     };
 
@@ -132,21 +153,8 @@ class Main extends Component {
     })
   }
 
-  componentDidMount() {
-    fetch(`${pageUrl}/api${this.props.location.pathname}`, {
-      method: 'get'
-    })
-    .then(res => res.json())
-    .then(res => {
-      this.setState(res);
-    }).catch(err => {
-      console.log("err", err);
-
-    })
-  }
-
   render() {
-    const { status, shortId, checkValues, title, url, teams } = this.state;
+    const { status, shortId, checkValues, checkedItems, title, url, team, teams } = this.state;
     let count = 0;
 
     let reportCard = [];
@@ -162,7 +170,10 @@ class Main extends Component {
               value={ title }
               onChange={e => this.setState({title: e.target.value})} />
             <label htmlFor="teamSelect">Team</label>
-            <select onChange={ e => this.setState({team: e.target.value}) } id="teamSelect">
+            <select
+              value={ team }
+              onChange={ e => this.setState({team: e.target.value}) }
+              id="teamSelect">
               <option>Select Team:</option>
               {
                 teams.map((team,i) => <option key={i} value={team.name}>{team.name}</option>)
@@ -200,11 +211,6 @@ class Main extends Component {
           }
         </div>
         <table cellSpacing="0" cellPadding="0">
-          <thead>
-            <tr>
-
-            </tr>
-          </thead>
           <tbody>
             {
               wcag.map(item => {
@@ -314,8 +320,10 @@ class Main extends Component {
                                       return (
                                         <tr key={i}>
                                           <td className="checkbox">
+                                            <a name={`${key}_${i}`} />
                                             <input
                                               id={`checklist_${key}_${i}`}
+                                              checked={ checkedItems.includes(`${key}_${i}`) }
                                               onChange={this.checkToggle.bind(this)}
                                               value={`${key}_${i}`}
                                               type="checkbox"/>
