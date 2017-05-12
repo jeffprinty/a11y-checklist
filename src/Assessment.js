@@ -109,7 +109,7 @@ class Main extends Component {
   update = (id) => {
     const { checkValues, title, url, shortId, team } = this.state;
     const data = {
-      checkValues, title, url,
+      checkValues, title, url, team,
       updatedAt: Date.now()
     };
 
