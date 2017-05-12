@@ -5,6 +5,7 @@
   "homepage": "http://54.70.239.42",
   "dependencies": {
     "babel-relay-plugin": "^0.10.0",
+    "moment": "^2.18.1",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-router": "^2.4.1",

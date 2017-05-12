@@ -150,9 +150,10 @@ class Main extends Component {
               value={ title }
               onChange={e => this.setState({title: e.target.value})} />
             <label htmlFor="teamSelect">Team</label>
-            <select id="teamSelect">
+            <select onChange={ e => this.setState({team: e.target.value}) } id="teamSelect">
+              <option>Select Team:</option>
               {
-                teams.map((team,i) => <option key={i} value={team.shortId}>{team.name}</option>)
+                teams.map((team,i) => <option key={i} value={team.name}>{team.name}</option>)
               }
             </select>
           </div>

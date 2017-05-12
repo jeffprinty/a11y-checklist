@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 import Team from './Team';
 
 import './App.css';
@@ -27,13 +28,27 @@ class List extends Component {
     const { assessmentArray } = this.state;
     return (
       <div className="App">
-        <table>
+        <table className="assessmentList">
+          <thead>
+            <tr>
+              <th>Assessment Title</th>
+              <th>Team</th>
+              <th>Updated</th>
+            </tr>
+          </thead>
           <tbody>
             { assessmentArray.map((item,i) => {
+              console.log(item.updatedAt);
               return (
                 <tr key={i}>
                   <td>
                     <a href={`/${item.shortId}`}>{item.title}</a>
+                  </td>
+                  <td>
+                    {item.team}
+                  </td>
+                  <td>
+                    {moment(item.updatedAt).fromNow()}
                   </td>
                 </tr>
               )

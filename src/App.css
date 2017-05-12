@@ -248,7 +248,7 @@ table.output td,  table.output th {
   align-items: center;
 }
 
-button {
+button, input[type=submit] {
   padding: 6px 10px;
   background-color: #da1b2c !important;
   color: white;
@@ -271,4 +271,8 @@ nav.mainButtons a {
 }
 nav.mainButtons li:hover {
   opacity: 0.8;
+}
+.assessmentList td, .assessmentList th {
+  text-align: left;
+  padding: 8px 12px;
 }

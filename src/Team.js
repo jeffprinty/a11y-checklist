@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 const pageUrl = 'http://54.70.239.42';
 let teamName;
@@ -20,7 +19,7 @@ const createTeam = (e) => {
 
 const Team = () => {
   return (
-    <form id="teamForm" className="flexRow" onSubmit={createTeam}>
+    <form id="teamForm" onSubmit={createTeam}>
       <label htmlFor="newTeam">New Team Name</label>
       <input id="teamName" type="text" name="name" ref={ el => teamName = el } />
       <input id="submit" type="submit" value="Create Team" />

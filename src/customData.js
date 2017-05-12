@@ -37,7 +37,7 @@ export function customData(key, url) {
         "automatable": false,
         "tools": [],
         "checklist": [
-
+          "Provide alternatives for any time-based media"
         ]
       },
       "phase4": `Transcripts and Visual Alerts: When audio provides information: Provide the same information in a text transcript OR in the case of audio used to indicate status (e.g. a beep, "You've got mail"), provide a visual indication of status as well`
@@ -50,7 +50,7 @@ export function customData(key, url) {
         "automatable": false,
         "tools": [],
         "checklist": [
-
+          "Videos with audio have accessible captions"
         ]
       },
       "phase4": "Captions When movies, animations, slideshows or games use synchronized visuals and sound to provide information, use captions to provide all important auditory information. "
@@ -63,7 +63,7 @@ export function customData(key, url) {
         "automatable": false,
         "tools": [],
         "checklist": [
-
+          "Provide audio description or alternative for prerecorded video content"
         ]
       },
       "phase3": `Complete Narration and Audio Description: When multimedia (e.g. video, narrated animation) includes important visual and auditory information, provide spoken description of any significant visual elements that would be missed when listening to the audio alone.`
@@ -76,7 +76,7 @@ export function customData(key, url) {
         "automatable": false,
         "tools": [],
         "checklist": [
-
+          "Captions are provided for live video"
         ]
       },
     },
@@ -88,7 +88,7 @@ export function customData(key, url) {
         "automatable": false,
         "tools": [],
         "checklist": [
-
+          "Provide audio description for prerecorded video content"
         ]
       },
       "phase3": `Complete Narration and Audio Description: When multimedia (e.g. video, narrated animation) includes important visual and auditory information, provide spoken description of any significant visual elements that would be missed when listening to the audio alone.`
@@ -258,7 +258,6 @@ Using a contrast ratio tool, choose text color and text background color so that
         "tools": [],
         "checklist": [
           `Check website contrast with <a href="http://www.checkmycolours.com/img/logo.jpg">checkmycolours.com</a>.`
-
         ]
       },
       "phase2": "Text Resize: Ensure that text size (except for captions) can be increased to at least 200% using controls in either the user agent (e.g. Web browser, PDF reader, Flash player) or the media. No content or functionality should be lost."
@@ -299,7 +298,7 @@ Using a contrast ratio tool, choose text color and text background color so that
         "automatable": true,
         "tools":["tenon"],
         "checklist": [
-
+          "Listen to all audio sources to ensure clarity"
         ]
       },
       "phase4": "Audio Clarity/Contrast: When you have the opportunity to set the volume of speech relative to volume of background sound: Allow the user to access the foreground speech without the background sound (e.g. control to turn off background sound, separate volume controls) OR Set the background sound to be 20 decibels lower than the foreground speech"
@@ -390,7 +389,8 @@ Using a contrast ratio tool, choose text color and text background color so that
         "automatable": false,
         "tools": [],
         "checklist": [
-
+          "All moving information can be paused",
+          "Information that updates automatically can be paused"
         ]
       },
       "phase3": `Ability to Stop Motion:
