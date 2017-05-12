@@ -86,11 +86,15 @@ class Main extends Component {
     super(props)
     const shortId = props.location.pathname.replace(/\//ig,'');
     this.state = {
+      status: '',
       checkValues: defaultState,
       title: 'New Assessment',
       url: 'http://www.macmillanlearning.com/catalog',
       shortId,
-      teams: ['teamA','teamB']
+      teams: [
+        {name: 'teamA'},
+        {name: 'teamB'}
+      ]
     }
   }
 
@@ -115,7 +119,16 @@ class Main extends Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(data)
-    }).then(res => console.log(res))
+    }).then(res => {
+      console.log(res);
+      if (res.status === 200) {
+        this.setState({status: 'updated successfully'});
+      } else {
+        this.setState({status: `error: ${res.status}`});
+      }
+    }).catch(err => {
+      this.setState({status: `error: ${err}`});
+    })
   }
 
   componentDidMount() {
@@ -124,7 +137,6 @@ class Main extends Component {
     })
     .then(res => res.json())
     .then(res => {
-      console.log("res", res);
       this.setState(res);
     }).catch(err => {
       console.log("err", err);
@@ -133,8 +145,7 @@ class Main extends Component {
   }
 
   render() {
-    const { shortId, checkValues, title, url, teams } = this.state;
-    console.log("teams", teams);
+    const { status, shortId, checkValues, title, url, teams } = this.state;
     let count = 0;
 
     let reportCard = [];
@@ -382,6 +393,7 @@ class Main extends Component {
         </table>
         <span>{ count } items</span>
         <button onClick={ this.update }>Update</button>
+        <span className="status">{ status }</span>
         <h3>Report Card</h3>
         <table className="output">
           <thead>
