@@ -90,6 +90,7 @@ class Main extends Component {
       checkValues: defaultState,
       title: 'New Assessment',
       url: 'http://www.macmillanlearning.com/catalog',
+      team: '',
       shortId,
       teams: [
         {name: 'teamA'},
@@ -106,7 +107,7 @@ class Main extends Component {
     this.setState({ checkValues });
   }
   update = (id) => {
-    const { checkValues, title, url, shortId } = this.state;
+    const { checkValues, title, url, shortId, team } = this.state;
     const data = {
       checkValues, title, url,
       updatedAt: Date.now()
