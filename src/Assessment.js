@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { Tabs, Tab } from 'react-tab-view';
 import StarRatingComponent from 'react-star-rating-component';
 import { customData, toolData } from './customData.js';
-import MLIcon from 'ml-react-cdl-icons';
 
 import './App.css';
 
