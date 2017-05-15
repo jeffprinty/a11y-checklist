@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Tabs, Tab } from 'react-tab-view';
 import StarRatingComponent from 'react-star-rating-component';
 import { customData, toolData } from './customData.js';
+import MLIcon from 'ml-react-cdl-icons';
 
 import './App.css';
 
@@ -80,6 +81,9 @@ const defaultState = checkValuesList.filter(el => defaultOff.indexOf(el) < 0)
 const cap = (txt) => {
   return txt.charAt(0).toUpperCase() + txt.slice(1,txt.length)
 }
+const focusInput = input => {
+  input.focus();
+}
 
 class Main extends Component {
   constructor(props) {
@@ -93,6 +97,8 @@ class Main extends Component {
       url: 'http://www.macmillanlearning.com/catalog',
       team: '',
       shortId,
+      owners: {},
+      notes: {},
       teams: [
         {name: 'teamA'},
         {name: 'teamB'}
@@ -127,13 +133,35 @@ class Main extends Component {
     const checkValues =  Array.prototype.map.call(checked, function (e) {return e.value;});
     this.setState({ checkValues, checkedItems });
   }
+
+  updateOwner = (e) => {
+    const { owners } = this.state;
+    const text = e.target.value;
+    const name = e.target.name;
+    let updatedOwners = {};
+    updatedOwners[name] = text;
+    this.setState({owners: Object.assign({}, owners, updatedOwners)});
+  }
+
+  updateNotes = (e) => {
+    const { notes } = this.state;
+    const text = e.target.value;
+    const name = e.target.name;
+    let updatedNotes = {};
+    updatedNotes[name] = text;
+    this.setState({ notes: Object.assign({}, notes, updatedNotes) });
+  }
+
+  toggleNotes = (e) => {
+    this.setState({notes: Object.assign({}, this.state.notes, {[e.target.name]: ''} )} );
+  }
+
   update = (id) => {
-    const { checkValues, checkedItems, title, url, shortId, team } = this.state;
+    const { checkValues, checkedItems, title, url, shortId, team, owners, notes } = this.state;
     const data = {
-      checkValues, checkedItems, title, url, team,
+      checkValues, checkedItems, title, url, team, owners, notes,
       updatedAt: Date.now()
     };
-
     fetch(`${pageUrl}/api/update/${shortId}`, {
       method: 'post',
       headers: {
@@ -154,7 +182,11 @@ class Main extends Component {
   }
 
   render() {
-    const { status, shortId, checkValues, checkedItems, title, url, team, teams } = this.state;
+    const {
+      status, shortId, checkValues,
+      checkedItems, title, url,
+      team, teams, owners, notes
+    } = this.state;
     let count = 0;
 
     let reportCard = [];
@@ -314,9 +346,16 @@ class Main extends Component {
                               <h2>Testing Procedures</h2>
                               { data.testing.description }
                               <table className="checklist">
+                                <thead>
+                                  <tr>
+                                    <td colSpan="3">Task</td>
+                                    <td>Owner</td>
+                                  </tr>
+                                </thead>
                                 <tbody>
                                   {
                                     data.testing.checklist.map((check,i) => {
+                                      const hasNote = typeof notes[`${key}_${i}`] !== 'undefined';
                                       return (
                                         <tr key={i}>
                                           <td className="checkbox">
@@ -332,6 +371,26 @@ class Main extends Component {
                                             <label
                                               htmlFor={`checklist_${key}_${i}`}
                                               dangerouslySetInnerHTML={{ __html: check }} />
+                                            { hasNote &&
+                                              <textarea
+                                                name={ `${key}_${i}` }
+                                                value={ notes[`${key}_${i}`] }
+                                                onChange={ this.updateNotes.bind(this) } />
+                                            }
+                                          </td>
+                                          <td className="notes">
+                                            <button
+                                              name={`${key}_${i}`}
+                                              className="noteButton"
+                                              onClick={ this.toggleNotes.bind(this) }>
+                                            </button>
+                                          </td>
+                                          <td className="owner">
+                                            <input
+                                              type="text"
+                                              name={ `${key}_${i}_owner` }
+                                              value={ owners[`${key}_${i}_owner`] }
+                                              onChange={ this.updateOwner.bind(this) } />
                                           </td>
                                         </tr>
                                       )

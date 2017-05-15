@@ -13,7 +13,7 @@ export function customData(key, url) {
   const dataHash = {
     "1-1-1": {
       "summary": "Provide text alternatives for non-text content",
-      "responsibility": ["dev","UX"],
+      "responsibility": ["editorial","production"],
       "testing": {
         "description": "",
         "automatable": true,
@@ -31,7 +31,7 @@ export function customData(key, url) {
     },
     "1-2-1": {
       "summary": "Provide an alternative to video-only and audio-only content",
-      "responsibility": ["content"],
+      "responsibility": ["editorial","production"],
       "testing": {
         "description": "",
         "automatable": false,
@@ -44,7 +44,7 @@ export function customData(key, url) {
     },
     "1-2-2": {
       "summary": "Provide captions for videos with audio",
-      "responsibility": ["content"],
+      "responsibility": ["editorial"],
       "testing": {
         "description": "",
         "automatable": false,
@@ -57,7 +57,7 @@ export function customData(key, url) {
     },
     "1-2-3": {
       "summary": "Video with audio has a second alternative",
-      "responsibility": ["content","UX"],
+      "responsibility": ["editorial"],
       "testing": {
         "description": "",
         "automatable": false,
@@ -70,7 +70,7 @@ export function customData(key, url) {
     },
     "1-2-4": {
       "summary": "Live Video with audio has a second alternative",
-      "responsibility": ["content","live"],
+      "responsibility": ["editorial","live"],
       "testing": {
         "description": "",
         "automatable": false,
@@ -82,7 +82,7 @@ export function customData(key, url) {
     },
     "1-2-5": {
       "summary": "Users have access to audio description for video content",
-      "responsibility": ["content"],
+      "responsibility": ["dev","editorial"],
       "testing": {
         "description": "",
         "automatable": false,
@@ -95,7 +95,7 @@ export function customData(key, url) {
     },
     "1-2-6": {
       "summary": "Provide sign language translations for videos",
-      "responsibility": ["content"],
+      "responsibility": ["editorial"],
       "testing": {
         "description": "",
         "automatable": false,
@@ -107,7 +107,7 @@ export function customData(key, url) {
     },
     "1-2-7": {
       "summary": "Provide extended audio description for videos",
-      "responsibility": ["content"],
+      "responsibility": ["editorial"],
       "testing": {
         "description": "",
         "automatable": false,
@@ -120,7 +120,7 @@ export function customData(key, url) {
     },
     "1-2-8": {
       "summary": "Provide a text alternative to your videos",
-      "responsibility": ["content","UX"],
+      "responsibility": ["editorial","UX"],
       "testing": {
         "description": "",
         "automatable": false,
@@ -132,7 +132,7 @@ export function customData(key, url) {
     },
     "1-2-9": {
       "summary": "Provide alternatives for live audio",
-      "responsibility": ["live","content"],
+      "responsibility": ["live","editorial"],
       "testing": {
         "description": "",
         "automatable": false,
@@ -186,7 +186,7 @@ export function customData(key, url) {
     },
     "1-3-3": {
       "summary": "Use more than one sense for instructions",
-      "responsibility": ["dev","UX","content"],
+      "responsibility": ["dev","UX","editorial"],
       "testing": {
         "description": "",
         "automatable": false,
@@ -198,7 +198,7 @@ export function customData(key, url) {
     },
     "1-4-1": {
       "summary": "Don’t use presentation that relies solely on colour",
-      "responsibility": ["dev","UX"],
+      "responsibility": ["dev","UX","editorial","production"],
       "testing": {
         "description": "",
         "automatable": false,
@@ -231,7 +231,7 @@ Color Contrast in Key Images  Design graphics so that pertinent content will not
     },
     "1-4-3": {
       "summary": "Contrast ratio between your text and background is at least 4.5:1",
-      "responsibility": ["dev",'UX'],
+      "responsibility": ["dev","UX","editorial"],
       "testing": {
         "description": "",
         "automatable": false,
@@ -264,7 +264,7 @@ Using a contrast ratio tool, choose text color and text background color so that
     },
     "1-4-5": {
       "summary": "Don't use images of text",
-      "responsibility": ["dev","content","UX"],
+      "responsibility": ["dev","editorial","production"],
       "testing": {
         "description": "",
         "automatable": true,
@@ -292,7 +292,7 @@ Using a contrast ratio tool, choose text color and text background color so that
     },
     "1-4-7": {
       "summary": "Your audio is clear for listeners to hear",
-      "responsibility": ["content"],
+      "responsibility": ["editorial"],
       "testing": {
         "description": "",
         "automatable": true,
@@ -317,7 +317,7 @@ Using a contrast ratio tool, choose text color and text background color so that
     },
     "1-4-9": {
       "summary": "Don't use images of text",
-      "responsibility": ["dev","UX","content"],
+      "responsibility": ["dev","UX","editorial"],
       "testing": {
         "description": "",
         "automatable": false,
@@ -462,7 +462,7 @@ Using a contrast ratio tool, choose text color and text background color so that
     },
     "2-4-1": {
       "summary": "Provide a ‘Skip to Content’ link",
-      "responsibility": ["dev","UX"],
+      "responsibility": ["dev","UX","production"],
       "testing": {
         "description": "",
         "automatable": true,
@@ -489,7 +489,7 @@ Using a contrast ratio tool, choose text color and text background color so that
     },
     "2-4-2": {
       "summary": "Use helpful and clear page titles",
-      "responsibility": ["dev","UX"],
+      "responsibility": ["dev","UX","editorial","production"],
       "testing": {
         "description": "",
         "automatable": true,
@@ -504,8 +504,8 @@ Using a contrast ratio tool, choose text color and text background color so that
   <li>Differentiates the frame or file from the others in your site</li></ul>`
     },
     "2-4-3": {
-      "summary": "Pages work in a logical order",
-      "responsibility": ["dev","UX"],
+      "summary": "Keyboard focus moves in a logical order in the page",
+      "responsibility": ["dev","UX","production"],
       "testing": {
         "description": "",
         "automatable": true,
@@ -519,7 +519,7 @@ Using a contrast ratio tool, choose text color and text background color so that
     },
     "2-4-4": {
       "summary": "Every link's purpose is clear from its context",
-      "responsibility": ["dev","UX"],
+      "responsibility": ["dev","UX","editorial"],
       "testing": {
         "description": "",
         "automatable": true,
@@ -551,7 +551,7 @@ Using a contrast ratio tool, choose text color and text background color so that
     },
     "2-4-6": {
       "summary": "Use clear headings and labels",
-      "responsibility": ["dev","UX"],
+      "responsibility": ["dev","UX","editorial","production"],
       "testing": {
         "description": "",
         "automatable": true,
@@ -604,7 +604,7 @@ Using a contrast ratio tool, choose text color and text background color so that
     },
     "3-1-1": {
       "summary": "Every page of your website has a language assigned",
-      "responsibility": ["dev","UX"],
+      "responsibility": ["dev","production"],
       "testing": {
         "description": "",
         "automatable": true,
@@ -617,7 +617,7 @@ Using a contrast ratio tool, choose text color and text background color so that
     },
     "3-1-2": {
       "summary": "Tell users when the language on a page changes",
-      "responsibility": ["dev","UX"],
+      "responsibility": ["dev","production"],
       "testing": {
         "description": "",
         "automatable": false,
@@ -642,7 +642,7 @@ Using a contrast ratio tool, choose text color and text background color so that
     },
     "3-1-4": {
       "summary": "Explain any abbreviations",
-      "responsibility": ["content"],
+      "responsibility": ["editorial"],
       "testing": {
         "description": "",
         "automatable": false,
@@ -654,7 +654,7 @@ Using a contrast ratio tool, choose text color and text background color so that
     },
     "3-1-5": {
       "summary": "Users with nine years of school can read your content",
-      "responsibility": ["content"],
+      "responsibility": ["editorial"],
       "testing": {
         "description": "",
         "automatable": false,
@@ -666,7 +666,7 @@ Using a contrast ratio tool, choose text color and text background color so that
     },
     "3-1-6": {
       "summary": "Explain any words that are hard to pronounce",
-      "responsibility": ["content"],
+      "responsibility": ["editorial"],
       "testing": {
         "description": "",
         "automatable": false,
@@ -706,7 +706,7 @@ Using a contrast ratio tool, choose text color and text background color so that
       },
     },
     "3-2-3": {
-      "summary": "Use menus in the same place across your website",
+      "summary": "Provide navigation in the same place across your website",
       "responsibility": ["dev","UX"],
       "testing": {
         "description": "",
@@ -718,7 +718,7 @@ Using a contrast ratio tool, choose text color and text background color so that
       },
     },
     "3-2-4": {
-      "summary": "Use menus in the same place across your website",
+      "summary": "Identify components appearing in multiple places in a consistent way",
       "responsibility": ["dev","UX"],
       "testing": {
         "description": "",
@@ -755,7 +755,7 @@ Using a contrast ratio tool, choose text color and text background color so that
     },
     "3-3-2": {
       "summary": "Label elements and give instructions",
-      "responsibility": ["dev","UX"],
+      "responsibility": ["dev","UX","editorial"],
       "testing": {
         "description": "",
         "automatable": true,
@@ -767,7 +767,7 @@ Using a contrast ratio tool, choose text color and text background color so that
     },
     "3-3-3": {
       "summary": "Suggest fixes when users make errors",
-      "responsibility": ["dev","UX"],
+      "responsibility": ["dev","UX","editorial"],
       "testing": {
         "description": "",
         "automatable": false,
@@ -791,7 +791,7 @@ Using a contrast ratio tool, choose text color and text background color so that
     },
     "3-3-5": {
       "summary": "Your website has detailed help and instructions",
-      "responsibility": ["UX","content"],
+      "responsibility": ["UX","editorial"],
       "testing": {
         "description": "",
         "automatable": false,
@@ -828,7 +828,7 @@ Using a contrast ratio tool, choose text color and text background color so that
     },
     "4-1-2": {
       "summary": "Build all elements for accessibility",
-      "responsibility": ["dev"],
+      "responsibility": ["dev","editorial","production"],
       "testing": {
         "description": "",
         "automatable": true,

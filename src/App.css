@@ -52,8 +52,6 @@ input[type=text] {
   font-size: 16pt;
   padding: 8px;
 }
-input.bigInput {
-}
 input.bigInput.wide {
   flex: 1;
 }
@@ -182,8 +180,7 @@ tbody tr:nth-child(even) {
 }
 
 textarea {
-  width: 100%;
-  min-height: 230px;
+  width: 95%;
 }
 .tags {
   padding: 4px;
@@ -195,7 +192,8 @@ textarea {
   border-radius: 4px;
   float: left;
 }
-.tag_content { background-color: #00ff00 }
+.tag_production { background-color: #00ff00 }
+.tag_editorial { background-color: #865f7f }
 .tag_UX { background-color: #0080ff }
 .tag_dev { background-color: #00ffff }
 .tag_live { background-color: #ff0080 }
@@ -220,16 +218,34 @@ td.checkbox {
   margin: 0 4px;
   width: 40px;
 }
+table.checklist {
+  min-width: 100%;
+}
 table.checklist label {
   user-select: none;
 }
-table.checklist input {
+table.checklist td.owner input {
+  width: 80px;
+}
+table.checklist td.notes {
+  width: 30px;
+  
+}
+table.checklist td.owner {
+  width: 80px;
+  text-align: right;
+}
+table.checklist input[type=text] {
+  font-size: 12pt;
+  padding: 3px;
+}
+table.checklist input[type=checkbox] {
   margin: 8px 12px;
   display: inline-block;
   transform: scale(1.5);
 }
 table.checklist td {
-  vertical-align: middle;
+  vertical-align: top;
 }
 table.output td,  table.output th {
   text-align: left
@@ -250,7 +266,7 @@ table.output td,  table.output th {
 
 button, input[type=submit] {
   padding: 6px 10px;
-  background-color: #da1b2c !important;
+  background-color: #da1b2c;
   color: white;
   font-size: 16pt;
   border: 0;
@@ -279,4 +295,13 @@ nav.mainButtons li:hover {
 .assessmentList td, .assessmentList th {
   text-align: left;
   padding: 8px 12px;
+}
+.noteButton {
+  background: url('../public/note-64x64.png') no-repeat transparent;
+  cursor: pointer;
+  background-size: 16px 16px;
+  background-position: center;
+  width: 24px;
+  height: 24px;
+  opacity: 0.5;
 }
