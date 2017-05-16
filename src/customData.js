@@ -1,4 +1,3 @@
-
 const colorLink = (url, type) => `https://www.toptal.com/designers/colorfilter?orig_uri=${url}&process_type=${type}`;
 
 export const toolData = {
@@ -262,7 +261,7 @@ Using a contrast ratio tool, choose text color and text background color so that
       testing: {
         description: '',
         automatable: false,
-        tools: ['browser'],
+        tools: [ 'browser' ],
         checklist: [
           'Increase the text size of the content by 200% and check that no text is clipped, truncated, or obscured.'
         ]
