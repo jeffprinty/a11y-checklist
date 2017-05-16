@@ -10,6 +10,9 @@ export const toolData = {
   },
   NVDA: {
     url: 'https://www.nvaccess.org/'
+  },
+  ColorContrastAnalyzer: {
+    url: 'https://www.paciellogroup.com/resources/contrastanalyser/'
   }
 };
 
@@ -226,7 +229,7 @@ Color Contrast in Key Images  Design graphics so that pertinent content will not
       testing: {
         description: '',
         automatable: false,
-        tools: [],
+        tools: [ 'ColorContrastAnalyzer' ],
         checklist: [
           'Audio does not play automatically'
         ]
@@ -239,7 +242,7 @@ Color Contrast in Key Images  Design graphics so that pertinent content will not
       testing: {
         description: '',
         automatable: false,
-        tools: ['JAWS', 'NVDA'],
+        tools: [ 'ColorContrastAnalyzer' ],
         checklist: [
           'Use <a href="https://macmillanlearning.atlassian.net/wiki/display/CDL/Accessible+Combinations">CDL Accessible Combinations</a>',
           'Check website contrast with <a href="http://www.checkmycolours.com/">checkmycolours.com</a>.'
