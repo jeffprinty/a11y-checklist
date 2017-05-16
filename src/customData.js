@@ -4,6 +4,12 @@ const colorLink = (url, type) => `https://www.toptal.com/designers/colorfilter?o
 export const toolData = {
   tenon: {
     url: 'http://tenon.io'
+  },
+  JAWS: {
+    url: 'http://www.freedomscientific.com/Products/Blindness/JAWS'
+  },
+  NVDA: {
+    url: 'https://www.nvaccess.org/'
   }
 };
 
@@ -15,7 +21,7 @@ export function customData(key, url) {
       testing: {
         description: '',
         automatable: true,
-        tools: [ 'tenon' ],
+        tools: [ 'tenon', 'JAWS', 'NVDA' ],
         checklist: [
           'Make sure placeholder attributes are NOT being used in place of label tags.',
           'If non-text content is a control or accepts user input, then it has a name that describes its purpose.',
@@ -172,7 +178,7 @@ export function customData(key, url) {
       testing: {
         description: '',
         automatable: true,
-        tools: [ 'tenon' ],
+        tools: [ 'tenon', 'JAWS', 'NVDA' ],
         checklist: [
           'Use tabindex responsibly',
           '<a target="_new" href="http://www.w3.org/TR/WCAG20-TECHS/C27.html">C27: Making the DOM order match the visual order</a>'
@@ -233,7 +239,7 @@ Color Contrast in Key Images  Design graphics so that pertinent content will not
       testing: {
         description: '',
         automatable: false,
-        tools: [],
+        tools: ['JAWS', 'NVDA'],
         checklist: [
           'Use <a href="https://macmillanlearning.atlassian.net/wiki/display/CDL/Accessible+Combinations">CDL Accessible Combinations</a>',
           'Check website contrast with <a href="http://www.checkmycolours.com/img/logo.jpg">checkmycolours.com</a>.'
@@ -464,7 +470,7 @@ Using a contrast ratio tool, choose text color and text background color so that
       testing: {
         description: '',
         automatable: true,
-        tools: [ 'tenon' ],
+        tools: [ 'tenon', 'JAWS', 'NVDA' ],
         checklist: [
           '<a href="http://www.w3.org/TR/WCAG20-TECHS/G1.html">G1: Adding a link at the top of each page that goes directly to the main content area</a>'
         ]
@@ -829,7 +835,7 @@ Using a contrast ratio tool, choose text color and text background color so that
       testing: {
         description: '',
         automatable: true,
-        tools: [ 'tenon' ],
+        tools: [ 'tenon', 'JAWS', 'NVDA' ],
         checklist: [
           'Use and contribute to the <a href="https://github.com/mlazul/ml-a11y-cdl-components" target="_new">Macmillan a11y Component Library</a>'
         ]

@@ -219,12 +219,17 @@ class Main extends Component {
             <label htmlFor="teamSelect">Team</label>
             <select
               value={ team }
-              onBlur={ e => this.setState({ team: e.target.value }) }
+              onBlur={ this.saveTimer }
+              onChange={ e => this.setState({ team: e.target.value }) }
               id="teamSelect"
             >
               <option>Select Team:</option>
               {
-                teams.map((teamData, i) => <option key={ i } value={ teamData.name }>{teamData.name}</option>)
+                teams.map((teamData, i) => (
+                  <option key={ i } value={ teamData.name }>
+                    { teamData.name }
+                  </option>
+                ))
               }
             </select>
           </div>
@@ -310,11 +315,9 @@ class Main extends Component {
                 return (
                   <tr key={ key }>
                     <td className="left">
-                      <a name={ key }>
-                        <h2>
-                          <a href={ uri } target="_new">{key}</a>
-                        </h2>
-                      </a>
+                      <h2>
+                        <a name={ key } href={ uri } target="_new">{key}</a>
+                      </h2>
                       <div className="summary">
                         {wuhcag_summary}
                       </div>
