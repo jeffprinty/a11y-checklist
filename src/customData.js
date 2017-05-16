@@ -261,7 +261,7 @@ Using a contrast ratio tool, choose text color and text background color so that
       testing: {
         description: '',
         automatable: false,
-        tools: [ 'browser' ],
+        tools: [],
         checklist: [
           'Increase the text size of the content by 200% and check that no text is clipped, truncated, or obscured.'
         ]
