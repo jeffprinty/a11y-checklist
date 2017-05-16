@@ -38,6 +38,16 @@ img.logo {
   width: 64px;
   height: 64px;
 }
+h1.pageTitle div {
+  display: inline-block;
+  position: relative;
+  left: -14px;
+  top: 10px;
+  font-size: 12pt;
+  color: #0080ff;
+  text-decoration: super;
+  transform: rotate(-22deg);
+}
 h1.pageTitle {
   font-size: 18pt;
 }
@@ -151,6 +161,7 @@ td.left {
   padding: 8px;
   width: 140px;
   max-width: 140px;
+  background-color: rgba(255,255,255,.4);
 }
 td.left h2 a {
   text-decoration: none;
@@ -182,9 +193,16 @@ tbody tr:nth-child(even) {
 textarea {
   width: 95%;
 }
+hr {
+  clear: both;
+}
 .tags {
   padding: 4px;
   margin-top: 5px;
+  display: block;
+}
+.tags b {
+  display: block;
 }
 .tag {
   padding: 6px;
@@ -202,7 +220,7 @@ textarea {
 .tag_phase3 { background-color: #45a5b5 }
 .tag_phase4 { background-color: #3192d3 }
 
-.tag_tenon { background-color: #295BA9 }
+.tag_tenon { background-color: #295BA9; color: #f8f8ff; }
 
 .summary {
   padding: 8px 4px;

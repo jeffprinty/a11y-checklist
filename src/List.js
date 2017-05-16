@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import Team from './Team';
-
 import './App.css';
+
 const pageUrl = 'http://54.70.239.42';
 
 class List extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       assessmentArray: []
-    }
+    };
   }
 
 
@@ -19,9 +19,9 @@ class List extends Component {
       method: 'get'
     })
     .then(res => res.json())
-    .then(res => {
-      this.setState({assessmentArray: res});
-    })
+    .then((res) => {
+      this.setState({ assessmentArray: res });
+    });
   }
 
   render() {
@@ -38,23 +38,23 @@ class List extends Component {
             </tr>
           </thead>
           <tbody>
-            { assessmentArray.map((item,i) => {
-              console.log(item.updatedAt);
+            { assessmentArray.map((item, i) => {
               return (
-                <tr key={i}>
+                <tr key={ i }>
                   <td>
-                    <a href={`/${item.shortId}`}>{item.title}</a>
+                    <a href={ `/${item.shortId}` }>{item.title}</a>
                   </td>
                   <td>
                     {item.team}
                   </td>
                   <td>
                     {
-                      item.checkedItems.map((check,i) => (
+                      item.checkedItems.map((check, index) => (
                         <a
-                          key={i}
+                          key={ index }
                           className="check"
-                          href={`/${item.shortId}#${check}`}>
+                          href={ `/${item.shortId}#${check}` }
+                        >
                           ✔
                         </a>
                       ))
@@ -64,7 +64,7 @@ class List extends Component {
                     {moment(item.updatedAt).fromNow()}
                   </td>
                 </tr>
-              )
+              );
             })}
           </tbody>
         </table>

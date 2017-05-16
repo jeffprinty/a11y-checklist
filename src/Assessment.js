@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Tabs, Tab } from 'react-tab-view';
 import StarRatingComponent from 'react-star-rating-component';
 import { customData, toolData } from './customData.js';
 
 import './App.css';
-
 import wcag from '../public/wcag.json';
+
 const pageUrl = 'http://54.70.239.42';
 
 const StyledCheckbox = styled.span`
@@ -59,7 +60,7 @@ const StyledCheckbox = styled.span`
   }
 `;
 
-const phases = ['phase1','phase2','phase3','phase4']
+const phases = [ 'phase1', 'phase2', 'phase3', 'phase4' ];
 
 const checkValuesList = [
   'onlyBLAR',
@@ -69,27 +70,26 @@ const checkValuesList = [
   'phase4',
   'dev',
   'UX',
-  'content',
-  'media',
+  'production',
+  'editorial',
   'live'
 ];
-const defaultOff = [];//['phase2','phase3','phase4','live'];
+const defaultOff = [];// ['phase2','phase3','phase4','live'];
 
-const defaultState = checkValuesList.filter(el => defaultOff.indexOf(el) < 0)
+const defaultState = checkValuesList.filter(el => defaultOff.indexOf(el) < 0);
 
-const cap = (txt) => {
-  return txt.charAt(0).toUpperCase() + txt.slice(1,txt.length)
-}
-const focusInput = input => {
-  input.focus();
-}
+const cap = txt => txt.charAt(0).toUpperCase() + txt.slice(1, txt.length);
+
+let saveTimeout;
 
 class Main extends Component {
   constructor(props) {
-    super(props)
-    const shortId = props.location.pathname.replace(/\//ig,'');
+    super(props);
+    const { pathname } = props.location;
+    const shortId = pathname.replace(/\//ig, '');
     this.state = {
       status: '',
+      saveStatus: true,
       checkValues: defaultState,
       checkedItems: [],
       title: 'New Assessment',
@@ -99,115 +99,132 @@ class Main extends Component {
       owners: {},
       notes: {},
       teams: [
-        {name: 'teamA'},
-        {name: 'teamB'}
+        { name: 'teamA' },
+        { name: 'teamB' }
       ]
-    }
+    };
   }
   componentDidMount() {
-    fetch(`${pageUrl}/api${this.props.location.pathname}`, {
+    const { pathname } = this.props.location;
+    fetch(`${pageUrl}/api${pathname}`, {
       method: 'get'
     })
     .then(res => res.json())
-    .then(res => {
-      console.log("got data", res);
+    .then((res) => {
       this.setState(res);
-    }).catch(err => {
-      console.log("err", err);
-
-    })
+    }).catch((err) => {
+      this.setState({ status: `Error: ${err}` });
+    });
   }
 
-  checkToggle = (e) => {
+  checkToggle = () => {
     const node = document;
-    let checkedFilterElements = node.querySelectorAll('.checkBar input[type="checkbox"]:checked');
-    const checkedFilters =  Array.prototype.map.call(checkedFilterElements, function (e) {return e.value;});
-    console.log("checkedFilters", checkedFilters);
-    
-    let checkedChecklistElements = node.querySelectorAll('.checklist input[type="checkbox"]:checked');
-    const checkedItems =  Array.prototype.map.call(checkedChecklistElements, function (e) {return e.value;});
-    console.log("checkedItems", checkedItems);
-    
-    let checked = node.querySelectorAll('input[type="checkbox"]:checked');
-    const checkValues =  Array.prototype.map.call(checked, function (e) {return e.value;});
-    this.setState({ checkValues, checkedItems });
+    const checkedFilterElements = node.querySelectorAll('.checkBar input[type="checkbox"]:checked');
+    const checkedFilters = Array.prototype.map.call(checkedFilterElements, e => e.value);
+
+    const checkedChecklistElements = node.querySelectorAll('.checklist input[type="checkbox"]:checked');
+    const checkedItems = Array.prototype.map.call(checkedChecklistElements, e => e.value);
+
+    const checked = node.querySelectorAll('input[type="checkbox"]:checked');
+    const checkValues = Array.prototype.map.call(checked, e => e.value);
+    this.setState({ checkValues, checkedItems, checkedFilters });
+    this.saveTimer();
   }
 
   updateOwner = (e) => {
     const { owners } = this.state;
     const text = e.target.value;
     const name = e.target.name;
-    let updatedOwners = {};
+    const updatedOwners = {};
     updatedOwners[name] = text;
-    this.setState({owners: Object.assign({}, owners, updatedOwners)});
+    this.setState({ owners: Object.assign({}, owners, updatedOwners) });
+    this.saveTimer();
   }
 
   updateNotes = (e) => {
     const { notes } = this.state;
     const text = e.target.value;
     const name = e.target.name;
-    let updatedNotes = {};
+    const updatedNotes = {};
     updatedNotes[name] = text;
     this.setState({ notes: Object.assign({}, notes, updatedNotes) });
+    this.saveTimer();
   }
 
   toggleNotes = (e) => {
-    this.setState({notes: Object.assign({}, this.state.notes, {[e.target.name]: ''} )} );
+    this.setState({ notes: Object.assign({}, this.state.notes, { [e.target.name]: '' }) });
   }
 
-  update = (id) => {
+  saveTimer = () => {
+    clearTimeout(saveTimeout);
+    this.setState({ saveStatus: false });
+    saveTimeout = setTimeout(() => {
+      this.update();
+    }, 10000);
+  }
+
+  update = () => {
     const { checkValues, checkedItems, title, url, shortId, team, owners, notes } = this.state;
     const data = {
-      checkValues, checkedItems, title, url, team, owners, notes,
+      checkValues,
+      checkedItems,
+      title,
+      url,
+      team,
+      owners,
+      notes,
       updatedAt: Date.now()
     };
     fetch(`${pageUrl}/api/update/${shortId}`, {
       method: 'post',
       headers: {
-        'Accept': 'application/json, text/plain, */*',
+        Accept: 'application/json, text/plain, */*',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(data)
-    }).then(res => {
-      console.log(res);
+    }).then((res) => {
       if (res.status === 200) {
-        this.setState({status: 'updated successfully'});
+        this.setState({ status: 'updated successfully', saveStatus: true });
       } else {
-        this.setState({status: `error: ${res.status}`});
+        this.setState({ status: `error: ${res.status}` });
       }
-    }).catch(err => {
-      this.setState({status: `error: ${err}`});
-    })
+    }).catch((err) => {
+      this.setState({ status: `error: ${err}` });
+    });
   }
 
   render() {
     const {
       status, shortId, checkValues,
       checkedItems, title, url,
-      team, teams, owners, notes
+      team, teams, owners, notes,
+      saveStatus
     } = this.state;
     let count = 0;
 
-    let reportCard = [];
+    const reportCard = [];
     return (
       <div className="App">
         <div className="assessmentDetails">
           <div className="flexRow">
             <label htmlFor="titleInput">Title</label>
+            <input type="hidden" value={ shortId } />
             <input
               className="bigInput wide"
               id="titleInput"
               type="text"
               value={ title }
-              onChange={e => this.setState({title: e.target.value})} />
+              onChange={ e => this.setState({ title: e.target.value }) }
+            />
             <label htmlFor="teamSelect">Team</label>
             <select
               value={ team }
-              onChange={ e => this.setState({team: e.target.value}) }
-              id="teamSelect">
+              onBlur={ e => this.setState({ team: e.target.value }) }
+              id="teamSelect"
+            >
               <option>Select Team:</option>
               {
-                teams.map((team,i) => <option key={i} value={team.name}>{team.name}</option>)
+                teams.map((teamData, i) => <option key={ i } value={ teamData.name }>{teamData.name}</option>)
               }
             </select>
           </div>
@@ -218,35 +235,35 @@ class Main extends Component {
               id="urlInput"
               type="text"
               value={ url }
-              onChange={e => this.setState({url: e.target.value})} />
+              onChange={ e => this.setState({ url: e.target.value }) }
+            />
           </div>
         </div>
         <div className="checkBar">
           <strong>Filters: </strong>
           {
-            checkValuesList.map((item,i) => {
-              return (
-                <StyledCheckbox className="styledCheckbox" key={i}>
-                  <input
-                    id={`${item}_checkbox`}
-                    name={ item }
-                    type="checkbox"
-                    checked={ checkValues.includes(item) }
-                    onChange={ this.checkToggle.bind(this) }
-                    value={item} />
-                  <span className="check" />
-                  <label htmlFor={`${item}_checkbox`}>{ cap(item) }</label>
-                </StyledCheckbox>
-              )
-            })
+            checkValuesList.map((item, i) => (
+              <StyledCheckbox className="styledCheckbox" key={ i }>
+                <input
+                  id={ `${item}_checkbox` }
+                  name={ item }
+                  type="checkbox"
+                  checked={ checkValues.includes(item) }
+                  onChange={ this.checkToggle.bind(this) }
+                  value={ item }
+                />
+                <span className="check" />
+                <label htmlFor={ `${item}_checkbox` }>{ cap(item) }</label>
+              </StyledCheckbox>
+              ))
           }
         </div>
         <table cellSpacing="0" cellPadding="0">
           <tbody>
             {
-              wcag.map(item => {
+              wcag.map((item) => {
                 const {
-                  //title,
+                  // title,
                   key,
                   description,
                   uri,
@@ -255,211 +272,220 @@ class Main extends Component {
                   wuhcag_detail,
                   wuhcag_tips
                 } = item;
-                const data = customData(key,'http://www.macmillanlearning.com/catalog');
-                if (conformance_level === "AAA") return null;
+                const data = customData(key, 'http://www.macmillanlearning.com/catalog');
+                if (conformance_level === 'AAA') return null;
 
                 let show = false;
 
-                const filterableFields = Object.keys(data).filter(key => {
-                  return /^phase/.test(key);
-                });
+                const filterableFields = Object.keys(data).filter(keyToFilter => /^phase/.test(keyToFilter));
 
                 const filterables = filterableFields.concat(data.responsibility);
 
-                filterables.forEach(rr => {
+                filterables.forEach((rr) => {
                   if (checkValues.includes(rr)) {
-                    show = true
+                    show = true;
                   }
-                })
-                
-                if ( checkValues.includes('onlyBLAR') ) {
+                });
+
+                if (checkValues.includes('onlyBLAR')) {
                   // No phases in item
                   if (filterableFields.length === 0) return null;
                   // Item has phases but should be filtered
                   let showPhase = false;
-                  filterableFields.forEach(phase => {
-                    if ( checkValues.includes(phase) ) {
-                      showPhase = true
+                  filterableFields.forEach((phase) => {
+                    if (checkValues.includes(phase)) {
+                      showPhase = true;
                     }
-                  })
-                  show = showPhase
+                  });
+                  show = showPhase;
                 }
 
                 if (!show) return null;
 
-                reportCard.push({...item, data});
+                reportCard.push({ ...item, data });
 
-                count++;
+                const noteLabel = typeof this.state.notes[key] !== 'undefined' ? 'Notes*' : 'Notes';
+
+                count += 1;
                 return (
                   <tr key={ key }>
                     <td className="left">
-                      <a name={ key } />
-                      <h2>
-                        <a href={ uri } target="_new">{key}</a>
-                      </h2>
+                      <a name={ key }>
+                        <h2>
+                          <a href={ uri } target="_new">{key}</a>
+                        </h2>
+                      </a>
                       <div className="summary">
                         {wuhcag_summary}
                       </div>
-                      <hr/>
+                      <hr />
                       <div className="hidden">
-                        <b>Compliance</b><br/>
-                        <StarRatingComponent 
-                            name={`${key}_compliance`} 
-                            starCount={5}
-                            value={2}
-                            onStarClick={() => {}}
+                        <b>Compliance</b><br />
+                        <StarRatingComponent
+                          name={ `${key}_compliance` }
+                          starCount={ 5 }
+                          value={ 2 }
+                          onStarClick={ () => {} }
                         />
-                        <br/><b>Difficulty</b><br/>
-                        <StarRatingComponent 
-                            name={`${key}_difficulty`} 
-                            starCount={5}
-                            value={3}
-                            onStarClick={() => {}}
+                        <br /><b>Difficulty</b><br />
+                        <StarRatingComponent
+                          name={ `${key}_difficulty` }
+                          starCount={ 5 }
+                          value={ 3 }
+                          onStarClick={ () => {} }
                         />
-                        <hr/>
-                      </div>
-                      <b>Tools</b>
-                      <div className="tags">
-                        {
-                          data.testing.tools.map((tool,i) => {
-                            return <span className={`tag tag_${tool}`} key={i}>{tool}</span>
-                          })
-                        }
+                        <hr />
                       </div>
                       <b>Responsibilities</b>
                       <div className="tags">
                         {
-                          filterableFields.concat(data.responsibility).map((name,i) => {
-                            return <span className={`tag tag_${name}`} key={i}>{name}</span>
-                          })
+                          filterableFields.concat(data.responsibility).map((name, i) => <span className={ `tag tag_${name}` } key={ i }>{name}</span>)
+                        }
+                      </div>
+                      <hr />
+                      <b>Tools</b>
+                      <div className="tags">
+                        {
+                          data.testing.tools.map((tool, i) => <span className={ `tag tag_${tool}` } key={ i }>{tool}</span>)
                         }
                       </div>
                     </td>
                     <td>
                       <Tabs
-                        defaultIndex={2}
-                        headers={['Testing','Details','Tips','Notes']}>
+                        defaultIndex={ 2 }
+                        headers={ [ 'Testing', 'Details', 'Tips', noteLabel ] }
+                      >
                         <Tab>
-                          { data.testing.checklist.length === 0 ? <h2>No procedures added yet</h2> : 
-                            <div>
-                              <h2>Testing Procedures</h2>
-                              { data.testing.description }
-                              <table className="checklist">
-                                <thead>
-                                  <tr>
-                                    <td colSpan="3">Task</td>
-                                    <td>Owner</td>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  {
-                                    data.testing.checklist.map((check,i) => {
+                          { data.testing.checklist.length === 0 ? <h2>No procedures added yet</h2> :
+                          <div>
+                            <h2>Testing Procedures</h2>
+                            { data.testing.description }
+                            <table className="checklist">
+                              <thead>
+                                <tr>
+                                  <td colSpan="3">Task</td>
+                                  <td>Owner</td>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {
+                                    data.testing.checklist.map((check, i) => {
                                       const hasNote = typeof notes[`${key}_${i}`] !== 'undefined';
                                       return (
-                                        <tr key={i}>
+                                        <tr key={ i }>
                                           <td className="checkbox">
-                                            <a name={`${key}_${i}`} />
                                             <input
-                                              id={`checklist_${key}_${i}`}
+                                              id={ `checklist_${key}_${i}` }
                                               checked={ checkedItems.includes(`${key}_${i}`) }
-                                              onChange={this.checkToggle.bind(this)}
-                                              value={`${key}_${i}`}
-                                              type="checkbox"/>
+                                              onChange={ this.checkToggle.bind(this) }
+                                              value={ `${key}_${i}` }
+                                              type="checkbox"
+                                            />
                                           </td>
                                           <td>
-                                            <label
-                                              htmlFor={`checklist_${key}_${i}`}
-                                              dangerouslySetInnerHTML={{ __html: check }} />
+                                            <a name={ `${key}_${i}` }>
+                                              <label
+                                                htmlFor={ `checklist_${key}_${i}` }
+                                                dangerouslySetInnerHTML={{ __html: check }}
+                                              />
+                                            </a>
                                             { hasNote &&
-                                              <textarea
-                                                name={ `${key}_${i}` }
-                                                value={ notes[`${key}_${i}`] }
-                                                onChange={ this.updateNotes.bind(this) } />
+                                              <div className="notesWrap">
+                                                <u>Notes</u>
+                                                <textarea
+                                                  name={ `${key}_${i}` }
+                                                  value={ notes[`${key}_${i}`] }
+                                                  onChange={ this.updateNotes.bind(this) }
+                                                />
+                                              </div>
                                             }
                                           </td>
                                           <td className="notes">
                                             <button
-                                              name={`${key}_${i}`}
+                                              name={ `${key}_${i}` }
+                                              title="Show notes for this task"
                                               className="noteButton"
-                                              onClick={ this.toggleNotes.bind(this) }>
-                                            </button>
+                                              onClick={ this.toggleNotes.bind(this) }
+                                            />
                                           </td>
                                           <td className="owner">
                                             <input
                                               type="text"
+                                              title="Who is taking ownership?"
                                               name={ `${key}_${i}_owner` }
                                               value={ owners[`${key}_${i}_owner`] }
-                                              onChange={ this.updateOwner.bind(this) } />
+                                              onChange={ this.updateOwner.bind(this) }
+                                            />
                                           </td>
                                         </tr>
-                                      )
+                                      );
                                     })
                                   }
-                                </tbody>
-                              </table>
-                              { data.testing.tools.length > 0 &&
-                                <div>
-                                  <b>Tools: </b>
-                                  {
-                                    data.testing.tools.map((tool,i) => {
-                                      return <a href={toolData[tool].url} key={i}>{ tool }</a>
-                                    })
-                                  }
-                                </div>
+                              </tbody>
+                            </table>
+                            { data.testing.tools.length > 0 &&
+                            <div>
+                              <b>Tools: </b>
+                              {
+                                data.testing.tools.map((tool, i) =>
+                                  <a href={ toolData[tool].url } key={ i }>{ tool }</a>
+                                )
                               }
                             </div>
+                              }
+                          </div>
                           }
                         </Tab>
                         <Tab>
                           <div>
-                            { description }<br/>
+                            { description }<br />
                             <div className="references">
                               {
-                                item.references.map((ref,i) => {
-                                  return <a key={i} href={ref.url} target="_new">{ref.title}</a>
-                                })
+                                item.references.map((ref, i) => <a key={ i } href={ ref.url } target="_new">{ref.title}</a>)
                               }
                             </div>
                             {
-                              phases.map((phase,i) => {
+                              phases.map((phase, i) => {
                                 if (data[phase] && checkValues.includes(phase)) {
                                   return (
-                                    <div key={i}>
+                                    <div key={ i }>
                                       <h3>
-                                        <a href="https://macmillanlearning.atlassian.net/wiki/display/a11y/Macmillan+BLARs+and+WCAG+Guidelines" target="_new">BLAR Phase {i+1}</a>
+                                        <a href="https://macmillanlearning.atlassian.net/wiki/display/a11y/Macmillan+BLARs+and+WCAG+Guidelines" target="_new">BLAR Phase {i + 1}</a>
                                       </h3>
-                                      <div dangerouslySetInnerHTML={{__html: data[phase] }} />
+                                      <div dangerouslySetInnerHTML={{ __html: data[phase] }} />
                                     </div>
-                                  )
-                                } else return null
+                                  );
+                                } return null;
                               })
                             }
                           </div>
                         </Tab>
-                          <Tab>
-                            <div>
-                              { 
-                                [wuhcag_detail, wuhcag_tips].map((html,i) => {
-                                  return (
-                                    <div key={i} dangerouslySetInnerHTML={{__html: html }} />
-                                  )
-                                })
-                              }
-                            </div>
-                          </Tab>
                         <Tab>
-                          <textarea />
+                          <div>
+                            {
+                                [ wuhcag_detail, wuhcag_tips ].map((html, i) => (
+                                  <div key={ i } dangerouslySetInnerHTML={{ __html: html }} />
+                                  ))
+                              }
+                          </div>
+                        </Tab>
+                        <Tab>
+                          <textarea
+                            name={ `${key}` }
+                            value={ notes[`${key}`] }
+                            onChange={ this.updateNotes.bind(this) }
+                          />
                         </Tab>
                       </Tabs>
                     </td>
                   </tr>
-                )
+                );
               })
             }
           </tbody>
         </table>
         <span>{ count } items</span>
-        <button onClick={ this.update }>Update</button>
+        <button onClick={ this.update }>{ saveStatus ? 'Saved' : 'Save' }</button>
         <span className="status">{ status }</span>
         <h3>Report Card</h3>
         <table className="output">
@@ -471,28 +497,26 @@ class Main extends Component {
           </thead>
           <tbody>
             {
-              reportCard.map((item,i) => {
-                return (
-                  <tr key={i}>
-                    <td>
-                      {item.key} - {item.wuhcag_summary}
-                    </td>
-                    <td>
-                      {
-                        item.data.testing.checklist.map((check,i) => {
-                          const key = `${item.key}_${i}`;
-                          const isChecked = this.state.checkValues.includes(key);
-                          return (
-                            <a key={i} href={`#${item.key}`} title={check.replace(/<(?:.|\n)*?>/gm, '')}>
-                              { isChecked ? '✔' : '✖️' }
-                            </a>
-                          )
-                        })
-                      }
-                    </td>
-                  </tr>
-                )
-              })
+              reportCard.map((item, i) => (
+                <tr key={ i }>
+                  <td>
+                    {item.key} - {item.wuhcag_summary}
+                  </td>
+                  <td>
+                    {
+                      item.data.testing.checklist.map((check, q) => {
+                        const key = `${item.key}_${q}`;
+                        const isChecked = this.state.checkValues.includes(key);
+                        return (
+                          <a key={ q } href={ `#${item.key}` } title={ check.replace(/<(?:.|\n)*?>/gm, '') }>
+                            { isChecked ? '✔' : '✖️' }
+                          </a>
+                        );
+                      })
+                    }
+                  </td>
+                </tr>
+                ))
             }
           </tbody>
         </table>
@@ -500,5 +524,11 @@ class Main extends Component {
     );
   }
 }
+
+Main.propTypes = {
+  location: PropTypes.shape({
+    pathname: PropTypes.string
+  }).isRequired
+};
 
 export default Main;

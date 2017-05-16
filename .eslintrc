@@ -16,6 +16,12 @@
     "jsx-a11y/tabindex-no-positive": "error",
     "template-curly-spacing": [ 2, "never" ],
     "array-bracket-spacing": [ 2, "always" ],
-    "no-confusing-arrow": [0, "never"]
+    "no-confusing-arrow": [0, "never"],
+    "import/extensions": 0,
+    "react/jsx-filename-extension": 0,
+    "react/no-array-index-key": 0,
+    "camelcase": 0,
+    "react/no-danger": 0,
+    "react/jsx-no-bind": 0
   }
 }

@@ -5,17 +5,19 @@ const Header = () => (
   <header>
     <div className="flexRow">
       <div className="flexRow">
-        <img alt="Narwa11y 'Wally' logo, a rainbow colored narwhal with glasses" className="logo" src="/narwha11y.png" />
-        <h1 className="pageTitle">Narwha11y: Accessibility Assessment Tool</h1>
+        <Link to="/">
+          <img alt="Narwa11y 'Wally' logo, a rainbow colored narwhal with glasses" className="logo" src="/narwha11y.png" />
+        </Link>
+        <h1 className="pageTitle">Narwha11y: Accessibility Assessment Tool<div>beta</div></h1>
       </div>
       <nav className="mainButtons">
         <ul>
-          <li><Link to='/'>Home</Link></li>
-          <li><a href='/api/create'>Create New</a></li>
+          <li><Link to="/">Home</Link></li>
+          <li><a href="/api/create">Create New</a></li>
         </ul>
       </nav>
     </div>
   </header>
-)
+);
 
 export default Header;
