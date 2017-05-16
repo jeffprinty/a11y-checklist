@@ -345,18 +345,22 @@ class Main extends Component {
                           filterableFields.concat(data.responsibility).map((name, i) => <span className={ `tag tag_${name}` } key={ i }>{name}</span>)
                         }
                       </div>
-                      <hr />
-                      <b>Tools</b>
-                      <div className="tags">
-                        {
-                          data.testing.tools.map((tool, i) => <span className={ `tag tag_${tool}` } key={ i }>{tool}</span>)
-                        }
-                      </div>
+                      { data.testing.tools.length > 0 &&
+                        <div>
+                          <hr />
+                          <b>Tools</b>
+                          <div className="tags">
+                            {
+                              data.testing.tools.map((tool, i) => <span className={ `tag tag_${tool}` } key={ i }>{tool}</span>)
+                            }
+                          </div>
+                        </div>
+                      }
                     </td>
                     <td>
                       <Tabs
                         defaultIndex={ 2 }
-                        headers={ [ 'Testing', 'Details', 'Tips', noteLabel ] }
+                        headers={ [ 'Testing', 'Baseline', 'Tips', noteLabel ] }
                       >
                         <Tab>
                           { data.testing.checklist.length === 0 ? <h2>No procedures added yet</h2> :
@@ -430,9 +434,16 @@ class Main extends Component {
                             <div>
                               <b>Tools: </b>
                               {
-                                data.testing.tools.map((tool, i) =>
-                                  <a href={ toolData[tool].url } key={ i }>{ tool }</a>
-                                )
+                                data.testing.tools.map((tool, i) => (
+                                  <a
+                                    className="toolLink"
+                                    href={ toolData[tool].url }
+                                    target="_new"
+                                    key={ i }
+                                  >
+                                    { tool }
+                                  </a>
+                                ))
                               }
                             </div>
                               }

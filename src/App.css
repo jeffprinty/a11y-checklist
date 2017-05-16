@@ -220,7 +220,9 @@ hr {
 .tag_phase3 { background-color: #45a5b5 }
 .tag_phase4 { background-color: #3192d3 }
 
-.tag_tenon { background-color: #295BA9; color: #f8f8ff; }
+.tag_tenon { background-color: #295BA9; color: #ccc; }
+.tag_JAWS { background-color: #015BB8; color: #f8f8ff; }
+.tag_NVDA { background-color: #F47721; color: #543A6F; }
 
 .summary {
   padding: 8px 4px;
@@ -322,4 +324,7 @@ nav.mainButtons li:hover {
   width: 24px;
   height: 24px;
   opacity: 0.5;
+}
+.toolLink {
+  margin: 0 3px;
 }

@@ -242,7 +242,7 @@ Color Contrast in Key Images  Design graphics so that pertinent content will not
         tools: ['JAWS', 'NVDA'],
         checklist: [
           'Use <a href="https://macmillanlearning.atlassian.net/wiki/display/CDL/Accessible+Combinations">CDL Accessible Combinations</a>',
-          'Check website contrast with <a href="http://www.checkmycolours.com/img/logo.jpg">checkmycolours.com</a>.'
+          'Check website contrast with <a href="http://www.checkmycolours.com/">checkmycolours.com</a>.'
         ]
       },
       phase3: `Contrast for Text Readability
@@ -259,9 +259,9 @@ Using a contrast ratio tool, choose text color and text background color so that
       testing: {
         description: '',
         automatable: false,
-        tools: [],
+        tools: ['browser'],
         checklist: [
-          'Check website contrast with <a href="http://www.checkmycolours.com/img/logo.jpg">checkmycolours.com</a>.'
+          'Increase the text size of the content by 200% and check that no text is clipped, truncated, or obscured.'
         ]
       },
       phase2: 'Text Resize: Ensure that text size (except for captions) can be increased to at least 200% using controls in either the user agent (e.g. Web browser, PDF reader, Flash player) or the media. No content or functionality should be lost.'
@@ -290,7 +290,7 @@ Using a contrast ratio tool, choose text color and text background color so that
         automatable: false,
         tools: [],
         checklist: [
-          'Check website contrast with <a href="http://www.checkmycolours.com/img/logo.jpg">checkmycolours.com</a>.'
+          'Check website contrast with <a href="http://www.checkmycolours.com/">checkmycolours.com</a>.'
         ]
       }
     },
