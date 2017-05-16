@@ -345,7 +345,7 @@ Using a contrast ratio tool, choose text color and text background color so that
           'Hide your mouse and use your app'
         ]
       },
-      phase1: 'Ensure that keyboard keys (instead of a mouse and instead of touch screen gestures that require eye-hand coordination) can be used to: Reach and operate all controls AND Navigate through active elements, following the reading order '
+      phase1: 'Ensure that keyboard keys (instead of a mouse and instead of touch screen gestures that require eye-hand coordination) can be used to reach and operate all controls and navigate through active elements, following the reading order '
     },
     '2-1-2': {
       summary: 'Your website must not trap keyboard users',
@@ -451,7 +451,7 @@ Using a contrast ratio tool, choose text color and text background color so that
 
         ]
       },
-      phase3: 'No Blinking/No Flickering  Design e-learning so that it does not cause blink, flash or flicker.'
+      phase3: 'No Blinking/No Flickering: Design e-learning so that it does not cause blink, flash or flicker.'
     },
     '2-3-2': {
       summary: 'No content flashes more than three times per second',
@@ -501,11 +501,11 @@ Using a contrast ratio tool, choose text color and text background color so that
         automatable: true,
         tools: [ 'tenon' ],
         checklist: [
-          '<a href="http://www.w3.org/TR/WCAG20-TECHS/G88.html">G88: Providing descriptive titles for Web pages</a>'
+          '<a href="http://www.w3.org/TR/WCAG20-TECHS/G88.html">G88: Provide a descriptive title for your page</a>'
         ]
       },
       phase2: `Page and Frames Titles:<br/>
-  For each frame and for each primary media file (e.g. HTML page, Flash movie, PDF document) provide a title that:
+  For each frame and for each primary media file provide a title that:
   <ul><li>Reflects the purpose or topic of the frame or file; and,</li>
   <li>Differentiates the frame or file from the others in your site</li></ul>`
     },
@@ -517,9 +517,9 @@ Using a contrast ratio tool, choose text color and text background color so that
         automatable: true,
         tools: [ 'tenon' ],
         checklist: [
-          '<a target="_new" href="http://www.w3.org/TR/WCAG20-TECHS/H4.html">Create a logical tab order through links, form controls, and objects</a>',
           'Use tabindex properly',
-          '<a href="http://www.w3.org/TR/WCAG20-TECHS/C27.html">C27: Making the DOM order match the visual order</a>'
+          '<a target="_new" href="http://www.w3.org/TR/WCAG20-TECHS/H4.html">Create a logical tab order through links, form controls, and objects</a>',
+          '<a href="http://www.w3.org/TR/WCAG20-TECHS/C27.html">C27: Make the DOM order match the visual order</a>'
         ]
       }
     },
@@ -531,8 +531,8 @@ Using a contrast ratio tool, choose text color and text background color so that
         automatable: true,
         tools: [ 'tenon' ],
         checklist: [
-          'Make sure link text is descriptive'
-
+          'Make sure link text is descriptive',
+          'Make sure link context can be programmatically determined with WAI-ARIA properties'
         ]
       },
       phase2: `Meaningful Link Text:<br/>
@@ -551,7 +551,7 @@ Using a contrast ratio tool, choose text color and text background color so that
         automatable: false,
         tools: [],
         checklist: [
-
+          'Page can be found through search'
         ]
       }
     },
@@ -590,7 +590,8 @@ Using a contrast ratio tool, choose text color and text background color so that
         automatable: false,
         tools: [],
         checklist: [
-
+          '<a href="http://www.w3.org/TR/2016/NOTE-WCAG20-TECHS-20161007/G65">G65: Provide a breadcrumb trail</a>',
+          '<a href="http://www.w3.org/TR/2016/NOTE-WCAG20-TECHS-20161007/G63">G63: Provide a site map</a>'
         ]
       }
     },
@@ -615,7 +616,7 @@ Using a contrast ratio tool, choose text color and text background color so that
         automatable: true,
         tools: [ 'tenon' ],
         checklist: [
-          '<a target="_new" href="http://www.w3.org/TR/WCAG20-TECHS/H57.html">H57: Using language attributes on the html element</a>'
+          '<a target="_new" href="http://www.w3.org/TR/WCAG20-TECHS/H57.html">H57: Use language attributes on the html element</a>'
         ]
       },
       phase2: 'Human Language: Indicate human language (e.g. Arabic, Chinese, English) following conventions for the media type.'

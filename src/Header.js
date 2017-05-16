@@ -6,7 +6,7 @@ const Header = () => (
     <div className="flexRow">
       <div className="flexRow">
         <Link to="/">
-          <img alt="Narwa11y 'Wally' logo, a rainbow colored narwhal with glasses" className="logo" src="/narwha11y.png" />
+          <img alt="Narwa11y 'Wally' logo, a rainbow colored narwhal wearing glasses. Its single horn is sparkly." className="logo" src="/narwha11y.png" />
         </Link>
         <h1 className="pageTitle">Narwha11y: Accessibility Assessment Tool<div>beta</div></h1>
       </div>

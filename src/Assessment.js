@@ -214,6 +214,7 @@ class Main extends Component {
               id="titleInput"
               type="text"
               value={ title }
+              onBlur={ this.saveTimer }
               onChange={ e => this.setState({ title: e.target.value }) }
             />
             <label htmlFor="teamSelect">Team</label>
@@ -240,6 +241,7 @@ class Main extends Component {
               id="urlInput"
               type="text"
               value={ url }
+              onBlur={ this.saveTimer }
               onChange={ e => this.setState({ url: e.target.value }) }
             />
           </div>
