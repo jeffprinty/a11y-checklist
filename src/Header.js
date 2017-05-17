@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import Trinary from './Trinary';
+
 const Header = () => (
   <header>
     <div className="flexRow">
@@ -17,6 +19,8 @@ const Header = () => (
         </ul>
       </nav>
     </div>
+    <Trinary title={ 'key' } onClick={() => {}} index={ 0 } indeterminate={true} />
+    <Trinary title={ 'key' } onClick={() => {}} index={ 0 } />
   </header>
 );
 

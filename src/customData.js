@@ -27,7 +27,9 @@ export function customData(key, url) {
         checklist: [
           'Make sure placeholder attributes are NOT being used in place of label tags.',
           'If non-text content is a control or accepts user input, then it has a name that describes its purpose.',
-          'If non-text content is decorative, it is implemented in a way that can be ignored by screen readers'
+          'If non-text content is decorative, it is implemented in a way that can be ignored by screen readers',
+          'Alt text is accurate and equivalent',
+          'Alt text does not contain the words "image of" or "picture of"'
         ]
       },
       phase2: 'Form Field Labels:<br/>Tie each user input control (e.g. text field, radio button, pull-down menu) to text that describes the purpose of the control, using conventions for the media type. It should be noted that placeholder text by itself is not an adequate labeling technique.',
@@ -342,7 +344,8 @@ Using a contrast ratio tool, choose text color and text background color so that
         tools: [ 'tenon' ],
         checklist: [
           'Site structure makes sense without a mouse',
-          'Hide your mouse and use your app'
+          'Tab through your site to ensure page order makes sense for keyboard-only users',
+          'If using modals, <a href="https://www.deque.com/blog/aria-modal-alert-dialogs-a11y-support-series-part-2/" target="_new">make sure they are keyboard accessible</a>'
         ]
       },
       phase1: 'Ensure that keyboard keys (instead of a mouse and instead of touch screen gestures that require eye-hand coordination) can be used to reach and operate all controls and navigate through active elements, following the reading order '
@@ -827,7 +830,7 @@ Using a contrast ratio tool, choose text color and text background color so that
         automatable: true,
         tools: [ 'tenon' ],
         checklist: [
-          'Use eslint or similar to check your code for errors'
+          'Use eslint to check your code for errors <a href="https://www.npmjs.com/package/eslint-plugin-jsx-a11y" target="_new">eslint react a11y plugin</a>'
         ]
       },
       phase2: 'Valid Markup and Spelling  When using markup languages (e.g. HTML, XHTML, SMIL) follow the specifications for the language and test for errors using a validator. When using human languages (e.g. English, Hindi, Japanese) test for spelling errors using a spell checker. '

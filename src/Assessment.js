@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Tabs, Tab } from 'react-tab-view';
 import StarRatingComponent from 'react-star-rating-component';
+
+import Trinary from './Trinary';
 import { customData, toolData } from './customData.js';
 
 import './App.css';
@@ -59,10 +61,13 @@ const StyledCheckbox = styled.span`
     }
   }
 `;
+const ChecklistRow = styled.tr`
+  opacity: ${props => props.notApplicable ? '0.3' : 1};
+`;
 
 const phases = [ 'phase1', 'phase2', 'phase3', 'phase4' ];
 
-const checkValuesList = [
+const filterList = [
   'onlyBLAR',
   'phase1',
   'phase2',
@@ -76,7 +81,7 @@ const checkValuesList = [
 ];
 const defaultOff = [];// ['phase2','phase3','phase4','live'];
 
-const defaultState = checkValuesList.filter(el => defaultOff.indexOf(el) < 0);
+const defaultFilters = filterList.filter(el => defaultOff.indexOf(el) < 0);
 
 const cap = txt => txt.charAt(0).toUpperCase() + txt.slice(1, txt.length);
 
@@ -90,8 +95,10 @@ class Main extends Component {
     this.state = {
       status: '',
       saveStatus: true,
-      checkValues: defaultState,
+      checkValues: defaultFilters,
+      notApplicable: [],
       checkedItems: [],
+      checkedFilters: [],
       title: 'New Assessment',
       url: 'http://www.macmillanlearning.com/catalog',
       team: '',
@@ -131,6 +138,22 @@ class Main extends Component {
     this.saveTimer();
   }
 
+  cycleCheck = (el) => {
+    const { checkedItems:checked, notApplicable:na } = this.state;
+    let checkedItems = checked;
+    let notApplicable = na;
+    if (!checkedItems.concat(notApplicable).includes(el)) {
+      checkedItems.push(el);
+    } else if (checkedItems.includes(el)) {
+      checkedItems = checkedItems.filter(item => item !== el);
+      notApplicable.push(el);
+    } else if (notApplicable.includes(el)) {
+      notApplicable = notApplicable.filter(item => item !== el);
+    }
+    this.setState({ checkedItems, notApplicable });
+    this.saveTimer();
+  }
+
   updateOwner = (e) => {
     const { owners } = this.state;
     const text = e.target.value;
@@ -164,15 +187,9 @@ class Main extends Component {
   }
 
   update = () => {
-    const { checkValues, checkedItems, title, url, shortId, team, owners, notes } = this.state;
+    const { shortId } = this.state;
     const data = {
-      checkValues,
-      checkedItems,
-      title,
-      url,
-      team,
-      owners,
-      notes,
+      ...this.state,
       updatedAt: Date.now()
     };
     fetch(`${pageUrl}/api/update/${shortId}`, {
@@ -195,7 +212,7 @@ class Main extends Component {
 
   render() {
     const {
-      status, shortId, checkValues,
+      status, shortId, checkValues, notApplicable,
       checkedItems, title, url,
       team, teams, owners, notes,
       saveStatus
@@ -249,7 +266,7 @@ class Main extends Component {
         <div className="checkBar">
           <strong>Filters: </strong>
           {
-            checkValuesList.map((item, i) => (
+            filterList.map((item, i) => (
               <StyledCheckbox className="styledCheckbox" key={ i }>
                 <input
                   id={ `${item}_checkbox` }
@@ -353,7 +370,14 @@ class Main extends Component {
                           <b>Tools</b>
                           <div className="tags">
                             {
-                              data.testing.tools.map((tool, i) => <span className={ `tag tag_${tool}` } key={ i }>{tool}</span>)
+                              data.testing.tools.map((tool, i) => (
+                                <span
+                                  className={ `tag tag_${tool}` }
+                                  key={ i }
+                                >
+                                  {tool}
+                                </span>
+                              ))
                             }
                           </div>
                         </div>
@@ -381,14 +405,23 @@ class Main extends Component {
                                     data.testing.checklist.map((check, i) => {
                                       const hasNote = typeof notes[`${key}_${i}`] !== 'undefined';
                                       return (
-                                        <tr key={ i }>
+                                        <ChecklistRow key={ i } notApplicable={ notApplicable.includes(`${key}_${i}`) }>
                                           <td className="checkbox">
-                                            <input
-                                              id={ `checklist_${key}_${i}` }
+                                            <div className="hidden">
+                                              <input
+                                                id={ `checklist_${key}_${i}` }
+                                                checked={ checkedItems.includes(`${key}_${i}`) }
+                                                onChange={ this.checkToggle.bind(this) }
+                                                value={ `${key}_${i}` }
+                                                type="checkbox"
+                                              />
+                                            </div>
+                                            <Trinary
+                                              title={ `${key}_${i}` }
+                                              onClick={ this.cycleCheck }
+                                              index={ i }
                                               checked={ checkedItems.includes(`${key}_${i}`) }
-                                              onChange={ this.checkToggle.bind(this) }
-                                              value={ `${key}_${i}` }
-                                              type="checkbox"
+                                              indeterminate={ notApplicable.includes(`${key}_${i}`) }
                                             />
                                           </td>
                                           <td>
@@ -426,7 +459,7 @@ class Main extends Component {
                                               onChange={ this.updateOwner.bind(this) }
                                             />
                                           </td>
-                                        </tr>
+                                        </ChecklistRow>
                                       );
                                     })
                                   }
@@ -522,10 +555,12 @@ class Main extends Component {
                     {
                       item.data.testing.checklist.map((check, q) => {
                         const key = `${item.key}_${q}`;
+                        const nA = this.state.notApplicable.includes(key);
                         const isChecked = this.state.checkValues.includes(key);
                         return (
                           <a key={ q } href={ `#${item.key}` } title={ check.replace(/<(?:.|\n)*?>/gm, '') }>
-                            { isChecked ? '✔' : '✖️' }
+                            { !nA && isChecked ? '✔' : '✖️' }
+                            { nA && '➖' }
                           </a>
                         );
                       })

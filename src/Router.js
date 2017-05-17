@@ -7,11 +7,11 @@ import {
 import List from './List';
 import Assessment from './Assessment';
 
-const Header = () => (
+const Router = () => (
   <Switch>
     <Route exact path="/" component={ List } />
     <Route path="/:id" component={ Assessment } />
   </Switch>
 );
 
-export default Header;
+export default Router;
