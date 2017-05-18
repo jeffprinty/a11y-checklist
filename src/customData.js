@@ -212,9 +212,9 @@ export function customData(key, url) {
         automatable: false,
         tools: [],
         checklist: [
-          `<a href="${colorLink(url, 'deutan')}" target="_new">Check your site for deutanopia</a>`,
-          `<a href="${colorLink(url, 'protan')}" target="_new">Check your site for protanopia</a>`,
-          `<a href="${colorLink(url, 'tritan')}" target="_new">Check your site for tritanopia</a>`,
+          `<a href="${colorLink(url, 'deutan')}" target="_new">Check ${url} for deutanopia</a>`,
+          `<a href="${colorLink(url, 'protan')}" target="_new">Check ${url} for protanopia</a>`,
+          `<a href="${colorLink(url, 'tritan')}" target="_new">Check ${url} for tritanopia</a>`,
           'Use your site with the <a href="http://daltonize.appspot.com/" target="_new">Daltonize bookmarklets</a>',
           '<a target="_new" href="http://www.w3.org/TR/WCAG20-TECHS/G14.html">G14: Ensuring that information conveyed by color differences is also available in text</a>',
           '<a target="_new" href="http://www.w3.org/TR/WCAG20-TECHS/C15.html">C15: Using CSS to change the presentation of a user interface component when it receives focus</a>'

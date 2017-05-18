@@ -249,7 +249,6 @@ table.checklist td.owner input {
 }
 table.checklist td.notes {
   width: 30px;
-  
 }
 table.checklist td.owner {
   width: 80px;
@@ -269,6 +268,9 @@ table.checklist td {
 }
 table.output td,  table.output th {
   text-align: left
+}
+.notesWrap {
+  padding-top: 8px;
 }
 .references {
   margin: 8px 0;

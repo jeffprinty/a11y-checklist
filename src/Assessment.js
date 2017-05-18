@@ -433,7 +433,7 @@ class Main extends Component {
                                             </a>
                                             { hasNote &&
                                               <div className="notesWrap">
-                                                <u>Notes</u>
+                                                <u>{ `${key}_${i} Notes` }</u>
                                                 <textarea
                                                   name={ `${key}_${i}` }
                                                   value={ notes[`${key}_${i}`] }
