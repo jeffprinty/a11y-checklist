@@ -3,6 +3,13 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Tabs, Tab } from 'react-tab-view';
 import StarRatingComponent from 'react-star-rating-component';
+import '../node_modules/react-accessible-accordion/dist/react-accessible-accordion.css';
+import {
+    Accordion,
+    AccordionItem,
+    AccordionItemTitle,
+    AccordionItemBody,
+} from 'react-accessible-accordion';
 
 import Trinary from './Trinary';
 import { customData, toolData } from './customData.js';
@@ -13,10 +20,11 @@ import wcag from '../public/wcag.json';
 const pageUrl = 'http://54.70.239.42';
 
 const StyledCheckbox = styled.span`
-  width: 20px;
+  min-width: 20px;
   position: relative;
-  margin: 20px auto;
-  line-height: 40px;
+  height: 25px;
+  line-height: 20px;
+
   span.check {
     cursor: pointer;
     width: 20px;
@@ -52,7 +60,7 @@ const StyledCheckbox = styled.span`
   }
   input[type=checkbox] {
     opacity: 0;
-    width: 70px;
+    min-width: 70px;
     height: 36px;
     position: absolute;
     z-index: 999;
@@ -60,6 +68,15 @@ const StyledCheckbox = styled.span`
       opacity: 1;
     }
   }
+`;
+
+const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+const F = styled.div`
+  flex: ${props => props.flex}
 `;
 const ChecklistRow = styled.tr`
   opacity: ${props => props.notApplicable ? '0.3' : 1};
@@ -338,7 +355,7 @@ class Main extends Component {
                         <a name={ key } href={ uri } target="_new">{key}</a>
                       </h2>
                       <div className="summary">
-                        {wuhcag_summary}
+                        { wuhcag_summary }
                       </div>
                       <hr />
                       <div className="hidden">
@@ -454,8 +471,8 @@ class Main extends Component {
                                             <input
                                               type="text"
                                               title="Who is taking ownership?"
-                                              name={ `${key}_${i}_owner` }
-                                              value={ owners[`${key}_${i}_owner`] }
+                                              name={ `${key}_${i}` }
+                                              value={ owners[`${key}_${i}`] }
                                               onChange={ this.updateOwner.bind(this) }
                                             />
                                           </td>
@@ -536,7 +553,79 @@ class Main extends Component {
         <span>{ count } items</span>
         <button onClick={ this.update }>{ saveStatus ? 'Saved' : 'Save' }</button>
         <span className="status">{ status }</span>
-        <h3>Report Card</h3>
+        <div className="reportCard">
+          <h3>Report Card</h3>
+          <Accordion accordion={ false }>
+            {
+              reportCard.map((item, i) => (
+                <AccordionItem expanded key={ i }>
+                  <AccordionItemTitle className="accordionTitle">
+                    <Row>
+                      <F flex={ 3 }>
+                        <h3>{item.key} - {item.wuhcag_summary}</h3>
+                      </F>
+                      <F flex={ 1 }>
+                        {
+                          item.data.testing.checklist.map((check, q) => {
+                            const key = `${item.key}_${q}`;
+                            const nA = this.state.notApplicable.includes(key);
+                            const isChecked = this.state.checkValues.includes(key);
+                            return (
+                              <a key={ q } href={ `#${item.key}` } title={ check.replace(/<(?:.|\n)*?>/gm, '') }>
+                                { !nA && isChecked ? '✔' : '✖️' }
+                                { nA && '➖' }
+                              </a>
+                            );
+                          })
+                        }
+                      </F>
+                    </Row>
+                  </AccordionItemTitle>
+                  <AccordionItemBody>
+                    <table className="reportTable">
+                      <thead>
+                        <tr>
+                          <th>Item</th>
+                          <th>*</th>
+                          <th>Owner</th>
+                          <th>Notes</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {
+                          item.data.testing.checklist.map((check, q) => {
+                            const key = `${item.key}_${q}`;
+                            const nA = this.state.notApplicable.includes(key);
+                            const isChecked = this.state.checkValues.includes(key);
+                            return (
+                              <tr key={ q }>
+                                <td className="title">
+                                  <a key={ q } href={ `#${item.key}` } title={ check.replace(/<(?:.|\n)*?>/gm, '') }>
+                                    { check.replace(/<(?:.|\n)*?>/gm, '') }
+                                  </a>
+                                </td>
+                                <td className="status">
+                                  { !nA && isChecked ? '✔' : '✖️' }
+                                  { nA && '➖' }
+                                </td>
+                                <td className="owner">
+                                  { owners[key] }
+                                </td>
+                                <td className="notes">
+                                  { notes[`${item.key}_${q}`] }
+                                </td>
+                              </tr>
+                            );
+                          })
+                        }
+                      </tbody>
+                    </table>
+                  </AccordionItemBody>
+                </AccordionItem>
+              ))
+            }
+          </Accordion>
+        </div>
         <table className="output">
           <thead>
             <tr>

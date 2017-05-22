@@ -241,7 +241,7 @@ Color Contrast in Key Images  Design graphics so that pertinent content will not
       summary: 'Contrast ratio between your text and background is at least 4.5:1',
       responsibility: [ 'dev', 'UX', 'editorial' ],
       testing: {
-        description: '',
+        description: '',  
         automatable: false,
         tools: [ 'ColorContrastAnalyzer' ],
         checklist: [
@@ -554,7 +554,8 @@ Using a contrast ratio tool, choose text color and text background color so that
         automatable: false,
         tools: [],
         checklist: [
-          'Page can be found through search'
+          'Page can be found through search',
+          'Page can be found through sitemap'
         ]
       }
     },
@@ -710,7 +711,8 @@ Using a contrast ratio tool, choose text color and text background color so that
         tools: [],
         checklist: [
           '<a target="_new" href="http://www.w3.org/TR/WCAG20-TECHS/G80.html">G80: Providing a submit button to initiate a change of context</a>',
-          '<a target="_new" href="http://www.w3.org/TR/WCAG20-TECHS/G13.html">G13: Describing what will happen before a change to a form control that causes a change of context to occur is made</a>'
+          '<a target="_new" href="http://www.w3.org/TR/WCAG20-TECHS/G13.html">G13: Describing what will happen before a change to a form control that causes a change of context to occur is made</a>',
+          '<a target="_new" href="http://www.cs.tut.fi/~jkorpela/forms/navmenu.html">Use dropdown menus responsibly</a>'
         ]
       }
     },
@@ -758,7 +760,7 @@ Using a contrast ratio tool, choose text color and text background color so that
         automatable: false,
         tools: [],
         checklist: [
-
+          'Forms have accessible error handling'
         ]
       }
     },

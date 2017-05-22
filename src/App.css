@@ -79,8 +79,16 @@ select {
 }
 
 .checkBar {
-  height: 40px;
+  min-height: 40px;
   background-color: #da1b2c;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 8px 0;
+}
+.checkBar strong {
+  padding: 0 12px;
 }
 
 .react-tabs {
@@ -329,4 +337,26 @@ nav.mainButtons li:hover {
 }
 .toolLink {
   margin: 0 3px;
+}
+.accordionTitle {
+  text-align: left;
+}
+.reportCard {
+  width: 820px;
+  margin: 0 auto;
+}
+.reportTable th {
+  font-weight: bold;
+}
+.reportCard .title {
+  width: 500px;
+}
+.reportCard .status {
+  width: 50px;
+}
+.reportCard .notes {
+  width: 270px;
+}
+.reportTable {
+  text-align: left;
 }
