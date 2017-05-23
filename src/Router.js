@@ -4,12 +4,12 @@ import {
   Route
 } from 'react-router-dom';
 
-import List from './List';
+import Main from './Main';
 import Assessment from './Assessment';
 
 const Router = () => (
   <Switch>
-    <Route exact path="/" component={ List } />
+    <Route exact path="/" component={ Main } />
     <Route path="/:id" component={ Assessment } />
   </Switch>
 );

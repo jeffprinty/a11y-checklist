@@ -360,3 +360,13 @@ nav.mainButtons li:hover {
 .reportTable {
   text-align: left;
 }
+.intro p {
+  text-align: left;
+  padding: 0 12px;
+}
+.teamlist li {
+  list-style: none;
+  text-align: left;
+  padding: 8px;
+  
+}
