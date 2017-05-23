@@ -3,21 +3,22 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Tabs, Tab } from 'react-tab-view';
 import StarRatingComponent from 'react-star-rating-component';
-import '../node_modules/react-accessible-accordion/dist/react-accessible-accordion.css';
 import {
     Accordion,
     AccordionItem,
     AccordionItemTitle,
     AccordionItemBody,
 } from 'react-accessible-accordion';
+import '../node_modules/react-accessible-accordion/dist/react-accessible-accordion.css';
 
 import Trinary from './Trinary';
+import TeamSelect from './TeamSelect';
+import { F, Row } from './shared';
 import { customData, toolData } from './customData.js';
 
 import './App.css';
 import wcag from '../public/wcag.json';
 
-import { F, Row } from './shared';
 const pageUrl = 'http://54.70.239.42';
 
 
@@ -246,21 +247,12 @@ class Main extends Component {
               onChange={ e => this.setState({ title: e.target.value }) }
             />
             <label htmlFor="teamSelect">Team</label>
-            <select
-              value={ team }
+            <TeamSelect
               onBlur={ this.saveTimer }
               onChange={ e => this.setState({ team: e.target.value }) }
-              id="teamSelect"
-            >
-              <option>Select Team:</option>
-              {
-                teams.map((teamData, i) => (
-                  <option key={ i } value={ teamData.name }>
-                    { teamData.name }
-                  </option>
-                ))
-              }
-            </select>
+              value={ team }
+              teams={ teams }
+            />
           </div>
           <div className="flexRow">
             <label htmlFor="urlInput">URL</label>

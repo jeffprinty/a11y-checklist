@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import Team from './Team';
+import TeamSelect from './TeamSelect';
 import { F, Row } from './shared';
 
 import './App.css';
@@ -35,12 +36,15 @@ class List extends Component {
     return (
       <div className="App">
         <form action={ `${pageUrl}/api/create` } method="post">
+          <label htmlFor="urlInput">URL:</label>
           <input
             className="wide"
+            id="urlInput"
             type="text"
             name="url"
             title="Enter a URL for assessment"
           />
+          <TeamSelect teams={ teams } />
           <button>Create New Assessment</button>
         </form>
         <table className="assessmentList">
@@ -77,6 +81,9 @@ class List extends Component {
                   </td>
                   <td>
                     {moment(item.updatedAt).fromNow()}
+                  </td>
+                  <td>
+                    <a href={ `${pageUrl}/api/delete/${item._id}` }>x</a>
                   </td>
                 </tr>
               );
