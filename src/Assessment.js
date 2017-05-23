@@ -17,7 +17,9 @@ import { customData, toolData } from './customData.js';
 import './App.css';
 import wcag from '../public/wcag.json';
 
+import { F, Row } from './shared';
 const pageUrl = 'http://54.70.239.42';
+
 
 const StyledCheckbox = styled.span`
   min-width: 20px;
@@ -70,14 +72,6 @@ const StyledCheckbox = styled.span`
   }
 `;
 
-const Row = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
-const F = styled.div`
-  flex: ${props => props.flex}
-`;
 const ChecklistRow = styled.tr`
   opacity: ${props => props.notApplicable ? '0.3' : 1};
 `;

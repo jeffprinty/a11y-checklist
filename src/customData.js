@@ -736,7 +736,7 @@ Using a contrast ratio tool, choose text color and text background color so that
         automatable: false,
         tools: [],
         checklist: [
-
+          'Use CDL components to maintain visual consistency'
         ]
       }
     },
@@ -772,7 +772,7 @@ Using a contrast ratio tool, choose text color and text background color so that
         automatable: true,
         tools: [ 'tenon' ],
         checklist: [
-
+          'Use ARIA attributes'
         ]
       }
     },
