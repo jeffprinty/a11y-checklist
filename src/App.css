@@ -368,5 +368,18 @@ nav.mainButtons li:hover {
   list-style: none;
   text-align: left;
   padding: 8px;
-  
+
+}
+form#createWithData button:hover {
+  background-color: #a2d6dd;
+}
+form#createWithData button {
+  background-color: #00758E;
+  border-radius: 0;
+}
+form#createWithData {
+  background-color: #45a5b5;
+}
+.wideUrl {
+  width: 90%;
 }

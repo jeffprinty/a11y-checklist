@@ -35,17 +35,26 @@ class List extends Component {
     const { assessmentArray, teams } = this.state;
     return (
       <div className="App">
-        <form action={ `${pageUrl}/api/create` } method="post">
-          <label htmlFor="urlInput">URL:</label>
-          <input
-            className="wide"
-            id="urlInput"
-            type="text"
-            name="url"
-            title="Enter a URL for assessment"
-          />
-          <TeamSelect teams={ teams } />
-          <button>Create New Assessment</button>
+        <form id="createWithData" action={ `${pageUrl}/api/create` } method="post">
+          <Row>
+            <F flex={3}>
+              <label style={{display: 'none '}}htmlFor="urlInput">URL:</label>
+              <input
+                className="wideUrl"
+                placeholder="Enter a URL"
+                id="urlInput"
+                type="text"
+                name="url"
+                title="Enter a URL for assessment"
+              />
+            </F>
+            <F flex={1}>
+              <TeamSelect teams={ teams } />
+            </F>
+            <F flex={1}>
+              <button>Create New Assessment</button>
+            </F>
+          </Row>
         </form>
         <table className="assessmentList">
           <thead>
