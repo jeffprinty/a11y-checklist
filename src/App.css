@@ -86,6 +86,10 @@ select {
   align-items: center;
   justify-content: flex-start;
   padding: 8px 0;
+  font-size: 14px;
+}
+.checkBar span:hover label {
+ color: white;
 }
 .checkBar strong {
   padding: 0 12px;
@@ -338,6 +342,9 @@ nav.mainButtons li:hover {
 .toolLink {
   margin: 0 3px;
 }
+.rightAlign {
+  text-align: right;
+}
 .accordionTitle {
   text-align: left;
 }
@@ -360,9 +367,19 @@ nav.mainButtons li:hover {
 .reportTable {
   text-align: left;
 }
+.intro {
+  align-items: flex-start;
+}
 .intro p {
   text-align: left;
   padding: 0 12px;
+}
+.teamlist {
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
+  -webkit-margin-start: 0;
+  -webkit-margin-end: 0;
+  -webkit-padding-start: 0;
 }
 .teamlist li {
   list-style: none;
@@ -382,4 +399,7 @@ form#createWithData {
 }
 .wideUrl {
   width: 90%;
+}
+.center {
+  text-align: center;
 }

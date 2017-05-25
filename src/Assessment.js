@@ -267,23 +267,27 @@ class Main extends Component {
           </div>
         </div>
         <div className="checkBar">
-          <strong>Filters: </strong>
-          {
-            filterList.map((item, i) => (
-              <StyledCheckbox className="styledCheckbox" key={ i }>
-                <input
-                  id={ `${item}_checkbox` }
-                  name={ item }
-                  type="checkbox"
-                  checked={ checkValues.includes(item) }
-                  onChange={ this.checkToggle.bind(this) }
-                  value={ item }
-                />
-                <span className="check" />
-                <label htmlFor={ `${item}_checkbox` }>{ cap(item) }</label>
-              </StyledCheckbox>
-              ))
-          }
+          <Row>
+            <strong>Filters: </strong>
+            <F flex={ 2 }>
+              {
+                filterList.map((item, i) => (
+                  <StyledCheckbox className="styledCheckbox" key={ i }>
+                    <input
+                      id={ `${item}_checkbox` }
+                      name={ item }
+                      type="checkbox"
+                      checked={ checkValues.includes(item) }
+                      onChange={ this.checkToggle.bind(this) }
+                      value={ item }
+                    />
+                    <span className="check" />
+                    <label htmlFor={ `${item}_checkbox` }>{ cap(item) }</label>
+                  </StyledCheckbox>
+                  ))
+              }
+            </F>
+          </Row>
         </div>
         <table cellSpacing="0" cellPadding="0">
           <tbody>
@@ -539,18 +543,55 @@ class Main extends Component {
         <span>{ count } items</span>
         <button onClick={ this.update }>{ saveStatus ? 'Saved' : 'Save' }</button>
         <span className="status">{ status }</span>
+        <hr />
         <div className="reportCard">
-          <h3>Report Card</h3>
+          <h2>Report Card</h2>
+          <table className="output">
+            <thead>
+              <tr>
+                <th>Section</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                reportCard.map((item, i) => (
+                  <tr key={ i }>
+                    <td>
+                      {item.key} - {item.wuhcag_summary}
+                    </td>
+                    <td>
+                      {
+                        item.data.testing.checklist.map((check, q) => {
+                          const key = `${item.key}_${q}`;
+                          const nA = this.state.notApplicable.includes(key);
+                          const isChecked = this.state.checkValues.includes(key);
+                          return (
+                            <a key={ q } href={ `#${item.key}` } title={ check.replace(/<(?:.|\n)*?>/gm, '') }>
+                              { !nA && isChecked ? '✔' : '✖️' }
+                              { nA && '➖' }
+                            </a>
+                          );
+                        })
+                      }
+                    </td>
+                  </tr>
+                  ))
+              }
+            </tbody>
+          </table>
+          <hr />
+          <h2>Indepth Report</h2>
           <Accordion accordion={ false }>
             {
               reportCard.map((item, i) => (
-                <AccordionItem expanded key={ i }>
+                <AccordionItem key={ i }>
                   <AccordionItemTitle className="accordionTitle">
                     <Row>
                       <F flex={ 3 }>
                         <h3>{item.key} - {item.wuhcag_summary}</h3>
                       </F>
-                      <F flex={ 1 }>
+                      <F flex={ 1 } className="rightAlign">
                         {
                           item.data.testing.checklist.map((check, q) => {
                             const key = `${item.key}_${q}`;
@@ -572,9 +613,9 @@ class Main extends Component {
                       <thead>
                         <tr>
                           <th>Item</th>
-                          <th>*</th>
-                          <th>Owner</th>
-                          <th>Notes</th>
+                          <th className="center">Owner</th>
+                          <th className="center">Notes</th>
+                          <th />
                         </tr>
                       </thead>
                       <tbody>
@@ -590,15 +631,15 @@ class Main extends Component {
                                     { check.replace(/<(?:.|\n)*?>/gm, '') }
                                   </a>
                                 </td>
-                                <td className="status">
-                                  { !nA && isChecked ? '✔' : '✖️' }
-                                  { nA && '➖' }
-                                </td>
                                 <td className="owner">
                                   { owners[key] }
                                 </td>
                                 <td className="notes">
                                   { notes[`${item.key}_${q}`] }
+                                </td>
+                                <td className="status rightAlign">
+                                  { !nA && isChecked ? '✔' : '✖️' }
+                                  { nA && '➖' }
                                 </td>
                               </tr>
                             );
@@ -612,40 +653,6 @@ class Main extends Component {
             }
           </Accordion>
         </div>
-        <table className="output">
-          <thead>
-            <tr>
-              <th>Section</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              reportCard.map((item, i) => (
-                <tr key={ i }>
-                  <td>
-                    {item.key} - {item.wuhcag_summary}
-                  </td>
-                  <td>
-                    {
-                      item.data.testing.checklist.map((check, q) => {
-                        const key = `${item.key}_${q}`;
-                        const nA = this.state.notApplicable.includes(key);
-                        const isChecked = this.state.checkValues.includes(key);
-                        return (
-                          <a key={ q } href={ `#${item.key}` } title={ check.replace(/<(?:.|\n)*?>/gm, '') }>
-                            { !nA && isChecked ? '✔' : '✖️' }
-                            { nA && '➖' }
-                          </a>
-                        );
-                      })
-                    }
-                  </td>
-                </tr>
-                ))
-            }
-          </tbody>
-        </table>
       </div>
     );
   }

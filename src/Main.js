@@ -37,8 +37,8 @@ class List extends Component {
       <div className="App">
         <form id="createWithData" action={ `${pageUrl}/api/create` } method="post">
           <Row>
-            <F flex={3}>
-              <label style={{display: 'none '}}htmlFor="urlInput">URL:</label>
+            <F flex={ 3 }>
+              <label style={{ display: 'none' }}htmlFor="urlInput">URL:</label>
               <input
                 className="wideUrl"
                 placeholder="Enter a URL"
@@ -99,14 +99,24 @@ class List extends Component {
             })}
           </tbody>
         </table>
-        <Row>
-          <F className="intro" flex={3}>
+        <Row className="intro">
+          <F flex={ 3 }>
             <h2>Narwha11y introduction</h2>
             <p>
-              Philosophy: We need a way to track progress on a11y remediation efforts. Instead of just pointing teams to the full WCAG and having them figure it out on their own, which results in many disparate implementations, it would be better to have a centralized tool for assessing the remediation progress. To that end I built Narwha11y, a persistent a11y assessment checklist tool. It combines the WCAG 2.0 AA and the Macmillan Baseline Accessibility Requirements into a filterable persistent checklist so teams can create and update their a11y assessments, going through each phase of the BLAR on their way to accessibility.
+              Philosophy: We need a way to track progress on a11y remediation
+              efforts. Instead of just pointing teams to the full WCAG and
+              having them figure it out on their own, which results in many
+              disparate implementations, it would be better to have a
+              centralized tool for assessing the remediation progress.
+              To that end I built Narwha11y, a persistent a11y assessment
+              checklist tool. It combines the WCAG 2.0 AA and the
+              Macmillan Baseline Accessibility Requirements into a
+              filterable persistent checklist so teams can create and
+              update their a11y assessments, going through each phase
+              of the BLAR on their way to accessibility.
             </p>
           </F>
-          <F flex={1}>
+          <F flex={ 1 }>
             <Team />
             <ul className="teamlist">
               {
