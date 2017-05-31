@@ -1,4 +1,15 @@
-const Colors = {
+import styled from 'styled-components';
+
+export const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+export const F = styled.div`
+  flex: ${props => props.flex}
+`;
+
+export const Colors = {
   very_light_red: '#ffe7e5',
   light_red: '#ffafaf',
   medium_red: '#ef5656',
@@ -54,4 +65,3 @@ const Colors = {
   very_dark_gray: '#383838',
   blackish: '#080808'
 };
-export default Colors;

@@ -7,17 +7,17 @@ import {
     Accordion,
     AccordionItem,
     AccordionItemTitle,
-    AccordionItemBody,
+    AccordionItemBody
 } from 'react-accessible-accordion';
-import '../node_modules/react-accessible-accordion/dist/react-accessible-accordion.css';
+import '../../node_modules/react-accessible-accordion/dist/react-accessible-accordion.css';
 
 import Trinary from './Trinary';
 import TeamSelect from './TeamSelect';
 import { F, Row } from './shared';
-import { customData, toolData } from './customData.js';
+import { customData, toolData } from '../customData.js';
 
 import './App.css';
-import wcag from '../public/wcag.json';
+import wcag from '../../public/wcag.json';
 
 const pageUrl = 'http://54.70.239.42';
 
