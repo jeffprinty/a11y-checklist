@@ -1,101 +1,31 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { Tabs, Tab } from 'react-tab-view';
-import StarRatingComponent from 'react-star-rating-component';
-import {
-    Accordion,
-    AccordionItem,
-    AccordionItemTitle,
-    AccordionItemBody
-} from 'react-accessible-accordion';
-import '../../node_modules/react-accessible-accordion/dist/react-accessible-accordion.css';
 
-import Trinary from './Trinary';
-import TeamSelect from './TeamSelect';
-import { F, Row } from './shared';
-import { customData, toolData } from '../customData.js';
+import ChecklistItem from './ChecklistItem';
+import FilterBar from './FilterBar';
+import Details from './Details';
+import DetailedReport from './reports/Detailed';
+import SimpleReport from './reports/Simple';
+import { customData, toolData } from '../data/customData.js';
 
 import './App.css';
-import wcag from '../../public/wcag.json';
+import wcag from '../data/wcag.json';
+
+const filteredWcag = wcag.filter(ww => ww.conformance_level !== 'AAA');
 
 const pageUrl = 'http://54.70.239.42';
-
-
-const StyledCheckbox = styled.span`
-  min-width: 20px;
-  position: relative;
-  height: 25px;
-  line-height: 20px;
-
-  span.check {
-    cursor: pointer;
-    width: 20px;
-    height: 20px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: linear-gradient(top, #222 0%, #45484d 100%);
-    border-radius: 4px;
-    box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,.4);
-    &:after {
-      content: '';
-      width: 9px;
-      height: 5px;
-      position: absolute;
-      top: 4px;
-      left: 4px;
-      border: 3px solid #fcfff4;
-      border-top: none;
-      border-right: none;
-      background: transparent;
-      opacity: 0;
-      transform: rotate(-45deg);
-    }
-    &:hover::after {
-      opacity: 0.3;
-    }
-  }
-  label {
-    cursor: pointer;
-    margin-left: 26px;
-    margin-right: 12px;
-  }
-  input[type=checkbox] {
-    opacity: 0;
-    min-width: 70px;
-    height: 36px;
-    position: absolute;
-    z-index: 999;
-    &:checked + span:after {
-      opacity: 1;
-    }
-  }
-`;
-
-const ChecklistRow = styled.tr`
-  opacity: ${props => props.notApplicable ? '0.3' : 1};
-`;
 
 const phases = [ 'phase1', 'phase2', 'phase3', 'phase4' ];
 
 const filterList = [
   'onlyBLAR',
-  'phase1',
-  'phase2',
-  'phase3',
-  'phase4',
-  'dev',
-  'UX',
-  'production',
-  'editorial',
-  'live'
+  'phase1', 'phase2', 'phase3', 'phase4',
+  'dev', 'UX', 'production', 'editorial', 'live'
 ];
-const defaultOff = [];// ['phase2','phase3','phase4','live'];
+const offByDefault = [ 'phase2', 'phase3', 'phase4', 'live' ];
+const defaultFilters = filterList.filter(el => offByDefault.indexOf(el) < 0);
 
-const defaultFilters = filterList.filter(el => defaultOff.indexOf(el) < 0);
-
-const cap = txt => txt.charAt(0).toUpperCase() + txt.slice(1, txt.length);
 
 let saveTimeout;
 
@@ -136,6 +66,11 @@ class Main extends Component {
     });
   }
 
+  handleChange = (obj) => {
+    const newStateObj = Object.assign({}, this.state, obj);
+    this.setState(newStateObj);
+  }
+
   checkToggle = () => {
     const node = document;
     const checkedFilterElements = node.querySelectorAll('.checkBar input[type="checkbox"]:checked');
@@ -168,8 +103,7 @@ class Main extends Component {
 
   updateOwner = (e) => {
     const { owners } = this.state;
-    const text = e.target.value;
-    const name = e.target.name;
+    const { value:text, name } = e.target;
     const updatedOwners = {};
     updatedOwners[name] = text;
     this.setState({ owners: Object.assign({}, owners, updatedOwners) });
@@ -178,8 +112,7 @@ class Main extends Component {
 
   updateNotes = (e) => {
     const { notes } = this.state;
-    const text = e.target.value;
-    const name = e.target.name;
+    const { value:text, name } = e.target;
     const updatedNotes = {};
     updatedNotes[name] = text;
     this.setState({ notes: Object.assign({}, notes, updatedNotes) });
@@ -187,6 +120,7 @@ class Main extends Component {
   }
 
   toggleNotes = (e) => {
+    // HACK This is a bit of a hack, modifies state in order to show textarea
     this.setState({ notes: Object.assign({}, this.state.notes, { [e.target.name]: '' }) });
   }
 
@@ -222,6 +156,10 @@ class Main extends Component {
     });
   }
 
+  filtered = (item, data) => {
+
+  }
+
   render() {
     const {
       status, shortId, checkValues, notApplicable,
@@ -234,82 +172,36 @@ class Main extends Component {
     const reportCard = [];
     return (
       <div className="App">
-        <div className="assessmentDetails">
-          <div className="flexRow">
-            <label htmlFor="titleInput">Title</label>
-            <input type="hidden" value={ shortId } />
-            <input
-              className="bigInput wide"
-              id="titleInput"
-              type="text"
-              value={ title }
-              onBlur={ this.saveTimer }
-              onChange={ e => this.setState({ title: e.target.value }) }
-            />
-            <label htmlFor="teamSelect">Team</label>
-            <TeamSelect
-              onBlur={ this.saveTimer }
-              onChange={ e => this.setState({ team: e.target.value }) }
-              value={ team }
-              teams={ teams }
-            />
-          </div>
-          <div className="flexRow">
-            <label htmlFor="urlInput">URL</label>
-            <input
-              className="bigInput wide"
-              id="urlInput"
-              type="text"
-              value={ url }
-              onBlur={ this.saveTimer }
-              onChange={ e => this.setState({ url: e.target.value }) }
-            />
-          </div>
-        </div>
-        <div className="checkBar">
-          <Row>
-            <strong>Filters: </strong>
-            <F flex={ 2 }>
-              {
-                filterList.map((item, i) => (
-                  <StyledCheckbox className="styledCheckbox" key={ i }>
-                    <input
-                      id={ `${item}_checkbox` }
-                      name={ item }
-                      type="checkbox"
-                      checked={ checkValues.includes(item) }
-                      onChange={ this.checkToggle.bind(this) }
-                      value={ item }
-                    />
-                    <span className="check" />
-                    <label htmlFor={ `${item}_checkbox` }>{ cap(item) }</label>
-                  </StyledCheckbox>
-                  ))
-              }
-            </F>
-          </Row>
-        </div>
+        <Details
+          title={ title }
+          shortId={ shortId }
+          url={ url }
+          onChange={ this.handleChange }
+          onBlur={ this.saveTimer }
+          team={ team }
+          teams={ teams }
+        />
+        <FilterBar
+          filterList={ filterList }
+          onChange={ this.checkToggle }
+          checkValues={ checkValues }
+        />
         <table cellSpacing="0" cellPadding="0">
           <tbody>
             {
-              wcag.map((item) => {
+              filteredWcag.map((item) => {
                 const {
                   // title,
                   key,
                   description,
                   uri,
-                  conformance_level,
                   wuhcag_summary,
                   wuhcag_detail,
                   wuhcag_tips
                 } = item;
                 const data = customData(key, 'http://www.macmillanlearning.com/catalog');
-                if (conformance_level === 'AAA') return null;
-
                 let show = false;
-
                 const filterableFields = Object.keys(data).filter(keyToFilter => /^phase/.test(keyToFilter));
-
                 const filterables = filterableFields.concat(data.responsibility);
 
                 filterables.forEach((rr) => {
@@ -348,23 +240,6 @@ class Main extends Component {
                         { wuhcag_summary }
                       </div>
                       <hr />
-                      <div className="hidden">
-                        <b>Compliance</b><br />
-                        <StarRatingComponent
-                          name={ `${key}_compliance` }
-                          starCount={ 5 }
-                          value={ 2 }
-                          onStarClick={ () => {} }
-                        />
-                        <br /><b>Difficulty</b><br />
-                        <StarRatingComponent
-                          name={ `${key}_difficulty` }
-                          starCount={ 5 }
-                          value={ 3 }
-                          onStarClick={ () => {} }
-                        />
-                        <hr />
-                      </div>
                       <b>Responsibilities</b>
                       <div className="tags">
                         {
@@ -409,86 +284,43 @@ class Main extends Component {
                               </thead>
                               <tbody>
                                 {
-                                    data.testing.checklist.map((check, i) => {
-                                      const hasNote = typeof notes[`${key}_${i}`] !== 'undefined';
-                                      return (
-                                        <ChecklistRow key={ i } notApplicable={ notApplicable.includes(`${key}_${i}`) }>
-                                          <td className="checkbox">
-                                            <div className="hidden">
-                                              <input
-                                                id={ `checklist_${key}_${i}` }
-                                                checked={ checkedItems.includes(`${key}_${i}`) }
-                                                onChange={ this.checkToggle.bind(this) }
-                                                value={ `${key}_${i}` }
-                                                type="checkbox"
-                                              />
-                                            </div>
-                                            <Trinary
-                                              title={ `${key}_${i}` }
-                                              onClick={ this.cycleCheck }
-                                              index={ i }
-                                              checked={ checkedItems.includes(`${key}_${i}`) }
-                                              indeterminate={ notApplicable.includes(`${key}_${i}`) }
-                                            />
-                                          </td>
-                                          <td>
-                                            <a name={ `${key}_${i}` }>
-                                              <label
-                                                htmlFor={ `checklist_${key}_${i}` }
-                                                dangerouslySetInnerHTML={{ __html: check }}
-                                              />
-                                            </a>
-                                            { hasNote &&
-                                              <div className="notesWrap">
-                                                <u>{ `${key}_${i} Notes` }</u>
-                                                <textarea
-                                                  name={ `${key}_${i}` }
-                                                  value={ notes[`${key}_${i}`] }
-                                                  onChange={ this.updateNotes.bind(this) }
-                                                />
-                                              </div>
-                                            }
-                                          </td>
-                                          <td className="notes">
-                                            <button
-                                              name={ `${key}_${i}` }
-                                              title="Show notes for this task"
-                                              className="noteButton"
-                                              onClick={ this.toggleNotes.bind(this) }
-                                            />
-                                          </td>
-                                          <td className="owner">
-                                            <input
-                                              type="text"
-                                              title="Who is taking ownership?"
-                                              name={ `${key}_${i}` }
-                                              value={ owners[`${key}_${i}`] }
-                                              onChange={ this.updateOwner.bind(this) }
-                                            />
-                                          </td>
-                                        </ChecklistRow>
-                                      );
-                                    })
-                                  }
+                                    data.testing.checklist.map((check, i) => (
+                                      <ChecklistItem
+                                        title={ check }
+                                        key={ i }
+                                        itemIndex={ i }
+                                        parentKey={ key }
+                                        checkedItems={ checkedItems }
+                                        notApplicable={ notApplicable }
+                                        notes={ notes }
+                                        owners={ owners }
+                                        toggleNotes={ this.toggleNotes }
+                                        checkToggle={ this.checkToggle }
+                                        updateNotes={ this.updateNotes }
+                                        cycleCheck={ this.cycleCheck }
+                                        updateOwner={ this.updateOwner }
+                                      />
+                                    ))
+                                }
                               </tbody>
                             </table>
                             { data.testing.tools.length > 0 &&
-                            <div>
-                              <b>Tools: </b>
-                              {
-                                data.testing.tools.map((tool, i) => (
-                                  <a
-                                    className="toolLink"
-                                    href={ toolData[tool].url }
-                                    target="_new"
-                                    key={ i }
-                                  >
-                                    { tool }
-                                  </a>
-                                ))
-                              }
-                            </div>
-                              }
+                              <div>
+                                <b>Tools: </b>
+                                {
+                                  data.testing.tools.map((tool, i) => (
+                                    <a
+                                      className="toolLink"
+                                      href={ toolData[tool].url }
+                                      target="_new"
+                                      key={ i }
+                                    >
+                                      { tool }
+                                    </a>
+                                  ))
+                                }
+                              </div>
+                            }
                           </div>
                           }
                         </Tab>
@@ -544,115 +376,18 @@ class Main extends Component {
         <button onClick={ this.update }>{ saveStatus ? 'Saved' : 'Save' }</button>
         <span className="status">{ status }</span>
         <hr />
-        <div className="reportCard">
-          <h2>Report Card</h2>
-          <table className="output">
-            <thead>
-              <tr>
-                <th>Section</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {
-                reportCard.map((item, i) => (
-                  <tr key={ i }>
-                    <td>
-                      {item.key} - {item.wuhcag_summary}
-                    </td>
-                    <td>
-                      {
-                        item.data.testing.checklist.map((check, q) => {
-                          const key = `${item.key}_${q}`;
-                          const nA = this.state.notApplicable.includes(key);
-                          const isChecked = this.state.checkValues.includes(key);
-                          return (
-                            <a key={ q } href={ `#${item.key}` } title={ check.replace(/<(?:.|\n)*?>/gm, '') }>
-                              { !nA && isChecked ? '✔' : '✖️' }
-                              { nA && '➖' }
-                            </a>
-                          );
-                        })
-                      }
-                    </td>
-                  </tr>
-                  ))
-              }
-            </tbody>
-          </table>
-          <hr />
-          <h2>Indepth Report</h2>
-          <Accordion accordion={ false }>
-            {
-              reportCard.map((item, i) => (
-                <AccordionItem key={ i }>
-                  <AccordionItemTitle className="accordionTitle">
-                    <Row>
-                      <F flex={ 3 }>
-                        <h3>{item.key} - {item.wuhcag_summary}</h3>
-                      </F>
-                      <F flex={ 1 } className="rightAlign">
-                        {
-                          item.data.testing.checklist.map((check, q) => {
-                            const key = `${item.key}_${q}`;
-                            const nA = this.state.notApplicable.includes(key);
-                            const isChecked = this.state.checkValues.includes(key);
-                            return (
-                              <a key={ q } href={ `#${item.key}` } title={ check.replace(/<(?:.|\n)*?>/gm, '') }>
-                                { !nA && isChecked ? '✔' : '✖️' }
-                                { nA && '➖' }
-                              </a>
-                            );
-                          })
-                        }
-                      </F>
-                    </Row>
-                  </AccordionItemTitle>
-                  <AccordionItemBody>
-                    <table className="reportTable">
-                      <thead>
-                        <tr>
-                          <th>Item</th>
-                          <th className="center">Owner</th>
-                          <th className="center">Notes</th>
-                          <th />
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {
-                          item.data.testing.checklist.map((check, q) => {
-                            const key = `${item.key}_${q}`;
-                            const nA = this.state.notApplicable.includes(key);
-                            const isChecked = this.state.checkValues.includes(key);
-                            return (
-                              <tr key={ q }>
-                                <td className="title">
-                                  <a key={ q } href={ `#${item.key}` } title={ check.replace(/<(?:.|\n)*?>/gm, '') }>
-                                    { check.replace(/<(?:.|\n)*?>/gm, '') }
-                                  </a>
-                                </td>
-                                <td className="owner">
-                                  { owners[key] }
-                                </td>
-                                <td className="notes">
-                                  { notes[`${item.key}_${q}`] }
-                                </td>
-                                <td className="status rightAlign">
-                                  { !nA && isChecked ? '✔' : '✖️' }
-                                  { nA && '➖' }
-                                </td>
-                              </tr>
-                            );
-                          })
-                        }
-                      </tbody>
-                    </table>
-                  </AccordionItemBody>
-                </AccordionItem>
-              ))
-            }
-          </Accordion>
-        </div>
+        <SimpleReport
+          reportCard={ reportCard }
+          notApplicable={ notApplicable }
+          checkValues={ checkValues }
+        />
+        <DetailedReport
+          reportCard={ reportCard }
+          notApplicable={ notApplicable }
+          checkValues={ checkValues }
+          owners={ owners }
+          notes={ notes }
+        />
       </div>
     );
   }

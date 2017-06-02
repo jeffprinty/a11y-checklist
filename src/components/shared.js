@@ -9,6 +9,57 @@ export const F = styled.div`
   flex: ${props => props.flex}
 `;
 
+export const StyledCheckbox = styled.span`
+  min-width: 20px;
+  position: relative;
+  height: 25px;
+  line-height: 20px;
+
+  span.check {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: linear-gradient(top, #222 0%, #45484d 100%);
+    border-radius: 4px;
+    box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,.4);
+    &:after {
+      content: '';
+      width: 9px;
+      height: 5px;
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      border: 3px solid #fcfff4;
+      border-top: none;
+      border-right: none;
+      background: transparent;
+      opacity: 0;
+      transform: rotate(-45deg);
+    }
+    &:hover::after {
+      opacity: 0.3;
+    }
+  }
+  label {
+    cursor: pointer;
+    margin-left: 26px;
+    margin-right: 12px;
+  }
+  input[type=checkbox] {
+    opacity: 0;
+    min-width: 70px;
+    height: 36px;
+    position: absolute;
+    z-index: 999;
+    &:checked + span:after {
+      opacity: 1;
+    }
+  }
+`;
+
 export const Colors = {
   very_light_red: '#ffe7e5',
   light_red: '#ffafaf',
