@@ -356,15 +356,9 @@ ul.teamlist {
   padding: 6px;
 
 }
-#createWithData button:hover {
-  background-color: #a2d6dd;
-}
-#createWithData button {
-  background-color: #00758E;
-  border-radius: 0;
-}
-#createWithData {
-  background-color: #45a5b5;
+.updated {
+  font-size: 8px;
+  color: #bbb;
 }
 .wideUrl {
   width: 90%;
@@ -372,6 +366,7 @@ ul.teamlist {
 .center {
   text-align: center;
 }
+
 .accordion__body {
     display: block;
     animation: fadein .35s ease-in;

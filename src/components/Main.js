@@ -9,7 +9,7 @@ import './App.css';
 
 const pageUrl = 'http://54.70.239.42';
 
-class List extends Component {
+class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -52,15 +52,17 @@ class List extends Component {
               <th>Assessment Title</th>
               <th>Team</th>
               <th>Checked</th>
-              <th>Updated</th>
             </tr>
           </thead>
           <tbody>
-            { assessmentArray.map((item, i) => {
-              return (
+            { assessmentArray.map((item, i) =>
+              (
                 <tr key={ i }>
                   <td>
                     <a href={ `/${item.shortId}` }>{item.title}</a>
+                    <div className="updated">
+                      Updated {moment(item.updatedAt).fromNow()}
+                    </div>
                   </td>
                   <td>
                     {item.team}
@@ -77,14 +79,11 @@ class List extends Component {
                     }
                   </td>
                   <td>
-                    {moment(item.updatedAt).fromNow()}
-                  </td>
-                  <td>
                     <button value={ item._id } onClick={ this.confirmDelete }>x</button>
                   </td>
                 </tr>
-              );
-            })}
+              )
+            )}
           </tbody>
         </table>
         <Row className="intro">
@@ -94,11 +93,9 @@ class List extends Component {
           <F flex={ 1 }>
             <h3>Teams</h3>
             <ul className="teamlist">
-              {
-                teams.map((team, t) =>
-                  <li key={ t }>{ team.name }</li>
-                )
-              }
+              { teams.map((team, t) =>
+                <li key={ t }>{ team.name }</li>
+              )}
             </ul>
             <Team />
           </F>
@@ -108,4 +105,4 @@ class List extends Component {
   }
 }
 
-export default List;
+export default Main;
