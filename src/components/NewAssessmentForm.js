@@ -23,7 +23,7 @@ const NewAssessmentForm = ({ pageUrl, teams }) => (
         <label style={{ display: 'none' }}htmlFor="urlInput">URL:</label>
         <input
           className="wideUrl"
-          placeholder="Enter a URL"
+          placeholder="Enter a URL or "
           id="urlInput"
           type="text"
           name="url"
