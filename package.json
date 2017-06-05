@@ -5,7 +5,12 @@
   "homepage": "http://54.70.239.42",
   "dependencies": {
     "babel-relay-plugin": "^0.10.0",
+    "body-parser": "^1.17.2",
+    "dotenv": "^4.0.0",
+    "express": "^4.15.3",
+    "html-metadata": "^1.6.3",
     "moment": "^2.18.1",
+    "mongoose": "^4.10.4",
     "prop-types": "^15.5.10",
     "react": "^15.5.4",
     "react-accessible-accordion": "^0.2.0",
@@ -14,6 +19,8 @@
     "react-router-dom": "^4.1.1",
     "react-star-rating-component": "^1.2.4",
     "react-tab-view": "^1.0.5",
+    "shortid": "^2.2.8",
+    "simple-node-logger": "^0.93.27",
     "styled-components": "^1.4.6"
   },
   "devDependencies": {
