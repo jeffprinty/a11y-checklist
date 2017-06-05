@@ -284,23 +284,23 @@ class Main extends Component {
                               </thead>
                               <tbody>
                                 {
-                                    data.testing.checklist.map((check, i) => (
-                                      <ChecklistItem
-                                        title={ check }
-                                        key={ i }
-                                        itemIndex={ i }
-                                        parentKey={ key }
-                                        checkedItems={ checkedItems }
-                                        notApplicable={ notApplicable }
-                                        notes={ notes }
-                                        owners={ owners }
-                                        toggleNotes={ this.toggleNotes }
-                                        checkToggle={ this.checkToggle }
-                                        updateNotes={ this.updateNotes }
-                                        cycleCheck={ this.cycleCheck }
-                                        updateOwner={ this.updateOwner }
-                                      />
-                                    ))
+                                  data.testing.checklist.map((check, i) => (
+                                    <ChecklistItem
+                                      title={ check }
+                                      key={ i }
+                                      itemIndex={ i }
+                                      parentKey={ key }
+                                      checkedItems={ checkedItems }
+                                      notApplicable={ notApplicable }
+                                      notes={ notes }
+                                      owners={ owners }
+                                      toggleNotes={ this.toggleNotes }
+                                      checkToggle={ this.checkToggle }
+                                      updateNotes={ this.updateNotes }
+                                      cycleCheck={ this.cycleCheck }
+                                      updateOwner={ this.updateOwner }
+                                    />
+                                  ))
                                 }
                               </tbody>
                             </table>

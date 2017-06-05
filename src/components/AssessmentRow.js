@@ -97,8 +97,9 @@ class AssessmentRow extends Component {
             headers={ [ 'Testing', 'Baseline', 'Tips', noteLabel ] }
           >
             <Tab>
-              { data.testing.checklist.length === 0 ? <h2>No procedures added yet</h2> :
-                <div>
+              { data.testing.checklist.length === 0
+                ? <h2>No procedures added yet</h2>
+                : <div>
                   <h2>Testing Procedures</h2>
                   { data.testing.description }
                   <table className="checklist">

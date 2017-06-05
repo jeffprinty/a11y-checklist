@@ -2,20 +2,26 @@
   text-align: center;
 }
 
+.logo {
+  width: 64px;
+  height: 64px;
+}
 body {
+  font-family: sans-serif;
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
 }
 h2 {
   font-size: 16pt;
+  -webkit-margin-after:0;
   -webkit-margin-before:0;
+  text-decoration: none;
 }
 
 p {
   margin: 0;
-  -webkit-margin-before:0;
   -webkit-margin-after:0;
+  -webkit-margin-before:0;
 }
 select {
   font-size: 16pt;
@@ -36,22 +42,19 @@ hr {
 
 .hidden { display:none; }
 .header {
-  position: relative;
   display: block;
+  position: relative;
   width: 100%;
 }
-.logo {
-  width: 64px;
-  height: 64px;
-}
+
 h1.pageTitle div {
+  color: #0080ff;
   display: inline-block;
+  font-size: 12pt;
   position: relative;
   left: -14px;
-  top: 10px;
-  font-size: 12pt;
-  color: #0080ff;
-  text-decoration: super;
+  top: 22px;
+  vertical-align: super;
   transform: rotate(-22deg);
 }
 h1.pageTitle {
@@ -72,18 +75,18 @@ input[type=text] {
   flex: 1;
 }
 .assessmentDetails label {
-  padding: 0 8px;
   font-weight: bold;
+  padding: 0 8px;
 }
 .checkBar {
-  min-height: 40px;
-  background-color: #da1b2c;
   display: flex;
   flex-flow: row wrap;
-  align-items: center;
   justify-content: flex-start;
+  align-items: center;
+  min-height: 40px;
   padding: 8px 0;
   font-size: 14px;
+  background-color: #da1b2c;
 }
 .checkBar span:hover label {
  color: white;
@@ -156,11 +159,6 @@ td.left {
   max-width: 140px;
   background-color: rgba(255,255,255,.4);
 }
-.left h2 {
-  text-decoration: none;
-  -webkit-margin-before:0;
-  -webkit-margin-after:0;
-}
 td {
   vertical-align: top;
   margin: 0;
@@ -175,9 +173,9 @@ tbody tr:nth-child(even) {
 }
 
 .tags {
-  padding: 4px;
-  margin-top: 5px;
   display: block;
+  margin-top: 5px;
+  padding: 4px;
 }
 .tags b {
   display: block;
@@ -296,6 +294,11 @@ nav.mainButtons li:hover {
   text-align: left;
   padding: 8px 12px;
 }
+.assessmentList button {
+  font-size: 10px;
+  line-height: 10px;
+  padding: 3px 6px;
+}
 .noteButton {
   background: url('/public/note-64x64.png') no-repeat transparent;
   cursor: pointer;
@@ -340,7 +343,7 @@ nav.mainButtons li:hover {
   text-align: left;
   padding: 0 12px;
 }
-.teamlist {
+ul.teamlist {
   -webkit-margin-before: 0;
   -webkit-margin-after: 0;
   -webkit-margin-start: 0;
@@ -350,7 +353,7 @@ nav.mainButtons li:hover {
 .teamlist li {
   list-style: none;
   text-align: left;
-  padding: 8px;
+  padding: 6px;
 
 }
 #createWithData button:hover {

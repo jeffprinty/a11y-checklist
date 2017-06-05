@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import Team from './Team';
-import TeamSelect from './TeamSelect';
+import NewAssessmentForm from './NewAssessmentForm';
+import ES6Markdown from './ES6Markdown';
 import { F, Row } from './shared';
 
 import './App.css';
@@ -31,31 +32,20 @@ class List extends Component {
     });
   }
 
+  confirmDelete = (e) => {
+    if (confirm('Are you sure you want to delete this assessment? Cannot be undone.')) {
+      window.location.href = `${pageUrl}/api/delete/${e.target.value}`;
+    }
+  }
+
   render() {
     const { assessmentArray, teams } = this.state;
     return (
       <div className="App">
-        <form id="createWithData" action={ `${pageUrl}/api/create` } method="post">
-          <Row>
-            <F flex={ 3 }>
-              <label style={{ display: 'none' }}htmlFor="urlInput">URL:</label>
-              <input
-                className="wideUrl"
-                placeholder="Enter a URL"
-                id="urlInput"
-                type="text"
-                name="url"
-                title="Enter a URL for assessment"
-              />
-            </F>
-            <F flex={1}>
-              <TeamSelect teams={ teams } />
-            </F>
-            <F flex={1}>
-              <button>Create New Assessment</button>
-            </F>
-          </Row>
-        </form>
+        <NewAssessmentForm
+          pageUrl={ pageUrl }
+          teams={ teams }
+        />
         <table className="assessmentList">
           <thead>
             <tr>
@@ -82,9 +72,7 @@ class List extends Component {
                           key={ index }
                           className="check"
                           href={ `/${item.shortId}#${check}` }
-                        >
-                          ✔
-                        </a>
+                        >✔</a>
                       ))
                     }
                   </td>
@@ -92,7 +80,7 @@ class List extends Component {
                     {moment(item.updatedAt).fromNow()}
                   </td>
                   <td>
-                    <a href={ `${pageUrl}/api/delete/${item._id}` }>x</a>
+                    <button value={ item._id } onClick={ this.confirmDelete }>x</button>
                   </td>
                 </tr>
               );
@@ -101,23 +89,10 @@ class List extends Component {
         </table>
         <Row className="intro">
           <F flex={ 3 }>
-            <h2>Narwha11y introduction</h2>
-            <p>
-              Philosophy: We need a way to track progress on a11y remediation
-              efforts. Instead of just pointing teams to the full WCAG and
-              having them figure it out on their own, which results in many
-              disparate implementations, it would be better to have a
-              centralized tool for assessing the remediation progress.
-              To that end I built Narwha11y, a persistent a11y assessment
-              checklist tool. It combines the WCAG 2.0 AA and the
-              Macmillan Baseline Accessibility Requirements into a
-              filterable persistent checklist so teams can create and
-              update their a11y assessments, going through each phase
-              of the BLAR on their way to accessibility.
-            </p>
+            <ES6Markdown fileName="/intro.md" />
           </F>
           <F flex={ 1 }>
-            <Team />
+            <h3>Teams</h3>
             <ul className="teamlist">
               {
                 teams.map((team, t) =>
@@ -125,6 +100,7 @@ class List extends Component {
                 )
               }
             </ul>
+            <Team />
           </F>
         </Row>
       </div>
