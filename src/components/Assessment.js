@@ -86,7 +86,7 @@ class Main extends Component {
   }
 
   cycleCheck = (el) => {
-    const { checkedItems:checked, notApplicable:na } = this.state;
+    const { checkedItems: checked, notApplicable: na } = this.state;
     let checkedItems = checked;
     let notApplicable = na;
     if (!checkedItems.concat(notApplicable).includes(el)) {
@@ -103,7 +103,7 @@ class Main extends Component {
 
   updateOwner = (e) => {
     const { owners } = this.state;
-    const { value:text, name } = e.target;
+    const { value: text, name } = e.target;
     const updatedOwners = {};
     updatedOwners[name] = text;
     this.setState({ owners: Object.assign({}, owners, updatedOwners) });
@@ -112,7 +112,7 @@ class Main extends Component {
 
   updateNotes = (e) => {
     const { notes } = this.state;
-    const { value:text, name } = e.target;
+    const { value: text, name } = e.target;
     const updatedNotes = {};
     updatedNotes[name] = text;
     this.setState({ notes: Object.assign({}, notes, updatedNotes) });
@@ -154,10 +154,6 @@ class Main extends Component {
     }).catch((err) => {
       this.setState({ status: `error: ${err}` });
     });
-  }
-
-  filtered = (item, data) => {
-
   }
 
   render() {

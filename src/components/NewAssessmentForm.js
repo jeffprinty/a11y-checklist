@@ -1,6 +1,6 @@
 import React from 'react';
-import { string, array } from 'prop-types';
 import styled from 'styled-components';
+import { string, array } from 'prop-types';
 
 import TeamSelect from './TeamSelect';
 import { F, Row } from './shared';

@@ -1,10 +1,11 @@
 import React from 'react';
+import { array, func } from 'prop-types';
 
 import { F, Row, StyledCheckbox } from './shared';
 
 const sentenceCase = txt => txt.charAt(0).toUpperCase() + txt.slice(1, txt.length);
 
-const FilterBar = ({filterList, checkValues, onChange}) => (
+const FilterBar = ({ filterList, checkValues, onChange }) => (
   <div className="checkBar">
     <Row>
       <strong>Filters: </strong>
@@ -29,5 +30,11 @@ const FilterBar = ({filterList, checkValues, onChange}) => (
     </Row>
   </div>
 );
+
+FilterBar.propTypes = {
+  filterList: array.isRequired,
+  checkValues: array.isRequired,
+  onChange: func.isRequired
+};
 
 export default FilterBar;

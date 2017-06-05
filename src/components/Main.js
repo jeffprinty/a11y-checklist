@@ -26,7 +26,6 @@ class Main extends Component {
     .then(res => res.json())
     .then((res) => {
       const sorted = res.docs.sort((a, b) => a.updatedAt < b.updatedAt);
-      console.log("sorted", sorted);
       this.setState({
         assessmentArray: sorted,
         teams: res.teams

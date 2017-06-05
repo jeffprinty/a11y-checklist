@@ -1,8 +1,9 @@
 import React from 'react';
+import { string, func, array } from 'prop-types';
 
 import TeamSelect from './TeamSelect';
 
-const Details = ({shortId, title, url, onChange, onBlur, team, teams}) => (
+const Details = ({ shortId, title, url, onChange, onBlur, team, teams }) => (
   <div className="assessmentDetails">
     <div className="flexRow">
       <label htmlFor="titleInput">Title</label>
@@ -36,5 +37,15 @@ const Details = ({shortId, title, url, onChange, onBlur, team, teams}) => (
     </div>
   </div>
 );
+
+Details.propTypes = {
+  shortId: string.isRequired,
+  title: string.isRequired,
+  url: string.isRequired,
+  team: string.isRequired,
+  onChange: func.isRequired,
+  onBlur: func.isRequired,
+  teams: array.isRequired
+};
 
 export default Details;
