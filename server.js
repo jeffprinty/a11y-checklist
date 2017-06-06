@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const short = require('shortid');
 const path = require('path');
 const scrape = require('html-metadata');
-const log = require('simple-node-logger').createSimpleLogger('project.log');
 require('dotenv').config();
 
 const app = express();
@@ -58,7 +57,7 @@ app.use((req, res, next) => {
 router.get('/', (req, res) => {
   Team.find({}, (error, teams) => {
     Assessment.find({}, (err, docs) => {
-      log('err', err);
+      if (err) console.log('err', err);
       res.json({
         docs, teams
       });
@@ -133,7 +132,7 @@ router.post('/create', (req, res) => {
       res.redirect(`/${shortId}`);
     });
   }).catch((err) => {
-    log(err);
+    console.log(err);
     // Passed value is not a URL, use as title
     const assessmentWithTitle = Object.assign({}, newAssessment, {
       title: url
@@ -160,7 +159,7 @@ router.get('/create', (req, res) => {
   });
 });
 router.post('/team/new', (req, res) => {
-  log('new team created:', req.body.name);
+  console.log('new team created:', req.body.name);
   const shortId = short.generate();
   const now = Date.now();
   const team = new Team({
@@ -192,5 +191,6 @@ app.get('/', mainPage);
 app.get('/:id', mainPage);
 
 app.listen(port, () => {
-  log(`api running on port ${port}`);
+  console.log('api running on port ' + port);
 });
+
