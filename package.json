@@ -1,8 +1,8 @@
 {
-  "name": "wcag-list",
+  "name": "narwhally",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://54.70.239.42",
+  "homepage": "http://a11y.mldev.cloud",
   "dependencies": {
     "babel-relay-plugin": "^0.10.0",
     "body-parser": "^1.17.2",
@@ -38,6 +38,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "ssh": "ssh -i '~/dev/_keys/a11y-dashboard.pem' ubuntu@54.70.239.42"
   }
 }
